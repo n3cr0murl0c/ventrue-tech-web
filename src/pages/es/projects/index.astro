@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const lang = 'es';
+const projects = await getCollection('projects');
+---
+
+<Layout title="Proyectos" lang={lang}>
+  <Navbar />
+  
+  <main class="pt-24 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">Proyectos</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Explora nuestros proyectos más recientes y descubre cómo ayudamos a transformar ideas en realidad.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        {projects.map((project) => (
+          <article class="card card-light dark:card-dark overflow-hidden">
+            <div class="aspect-video bg-gradient-to-br from-primary-500 to-ventrue-accent flex items-center justify-center relative">
+              <span class="text-6xl font-bold text-white">{project.data.title[0]}</span>
+              {project.data.featured && (
+                <span class="absolute top-4 right-4 px-3 py-1 text-xs font-semibold bg-white text-primary-600 rounded-full">
+                  Destacado
+                </span>
+              )}
+            </div>
+            <div class="p-8">
+              <h2 class="text-2xl font-bold mb-3">{project.data.title}</h2>
+              <p class="text-gray-600 dark:text-gray-400 mb-6">
+                {project.data.description}
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                {project.data.technologies.map((tech) => (
+                  <span class="px-3 py-1 text-sm rounded-lg bg-gray-100 dark:bg-white/10">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div class="flex gap-4">
+                {project.data.link && (
+                  <a href={project.data.link} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
+                    Ver Proyecto
+                  </a>
+                )}
+                {project.data.github && (
+                  <a href={project.data.github} target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm">
+                    GitHub
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

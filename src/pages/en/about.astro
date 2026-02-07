@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="About Us" lang="en">
+  <Navbar />
+  
+  <main class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">About Ventrue Tech</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          We are a team of passionate developers creating innovative technology solutions that make a real impact.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mission & Vision Detailed -->
+    <section class="py-24 bg-gray-50 dark:bg-ventrue-dark">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-16">
+          <div>
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
+              Empowering companies and developers with cutting-edge technological tools that drive innovation and sustainable growth in an ever-evolving digital world.
+            </p>
+            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+              We believe technology should be an enabler, not an obstacle. That's why we dedicate ourselves to creating solutions that simplify complex processes and democratize access to powerful tools.
+            </p>
+          </div>
+          <div>
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-ventrue-accent to-primary-500 flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <h2 class="text-3xl font-bold mb-6">Our Vision</h2>
+            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
+              To be global leaders in technological solutions that transform how the world develops software, setting new standards of excellence and innovation.
+            </p>
+            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+              We envision a future where every company, regardless of size, has access to enterprise-level tools that allow them to compete in the global digital economy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Detailed -->
+    <section class="py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Our Values</h2>
+          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            The principles that guide every decision and action we take.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            { icon: '💡', title: 'Innovation', desc: 'We constantly explore new technologies and methodologies to deliver cutting-edge solutions. We are not afraid to challenge the status quo.', color: 'from-yellow-400 to-orange-500' },
+            { icon: '⭐', title: 'Quality', desc: 'Every line of code, every design, every interaction is created with meticulous attention to detail and the highest standards.', color: 'from-blue-400 to-blue-600' },
+            { icon: '🤝', title: 'Integrity', desc: 'We act with honesty and transparency in all our relationships. We keep our promises and take responsibility.', color: 'from-green-400 to-green-600' },
+            { icon: '👥', title: 'Collaboration', desc: 'We believe in the power of teamwork, both internally and with our clients. The best solutions come from dialogue.', color: 'from-purple-400 to-purple-600' },
+          ].map((value) => (
+            <div class="card card-light dark:card-dark p-8 text-center">
+              <div class={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${value.color} flex items-center justify-center mb-6`}>
+                <span class="text-3xl">{value.icon}</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-4">{value.title}</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">{value.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 bg-gradient-to-r from-primary-500 to-ventrue-accent">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+          Want to work with us?
+        </h2>
+        <p class="text-xl text-white/80 mb-8">
+          We are always looking for new challenges and opportunities to create something amazing.
+        </p>
+        <a href="/en/contact" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors">
+          Contact Us
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

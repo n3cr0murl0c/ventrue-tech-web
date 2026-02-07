@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const lang = 'en';
+const posts = (await getCollection('blog')).filter(p => p.data.lang === 'en' || p.data.lang === 'es').sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Blog" lang={lang}>
+  <Navbar />
+  
+  <main class="pt-24 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">Blog</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Articles about software development, best practices, and technology trends.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <a href={`/en/blog/${post.slug}`} class="card card-light dark:card-dark group">
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {post.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </time>
+                {post.data.readTime && (
+                  <>
+                    <span>•</span>
+                    <span>{post.data.readTime} min read</span>
+                  </>
+                )}
+              </div>
+              <h2 class="text-xl font-semibold mb-2 group-hover:text-primary-500 transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                {post.data.description}
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {post.data.tags.slice(0, 3).map((tag) => (
+                  <span class="px-2 py-1 text-xs rounded-lg bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+              <span class="text-primary-500 text-sm font-medium group-hover:underline">
+                Read more →
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
