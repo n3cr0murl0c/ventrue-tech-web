@@ -8,8 +8,7 @@ export default defineConfig({
     defaultLocale: 'es',
     locales: ['es', 'en'],
     routing: {
-      prefixDefaultLocale: false,
-      redirectToDefaultLocale: true,
+      prefixDefaultLocale: true,
     },
     fallback: {
       en: 'es',
