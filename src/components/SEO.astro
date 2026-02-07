@@ -107,14 +107,43 @@ const jsonLd = {
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-<!-- Google Analytics 4 -->
-<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0TQXN51VW3"></script>
+<!-- Google Consent Mode v2 -->
 <script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  
+  // Default consent settings (GDPR/CCPA compliant)
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'wait_for_update': 500,
+    'url_passthrough': true
+  });
+  
+  // Initialize gtag
   gtag('js', new Date());
+  
+  // Google Analytics 4 config
   gtag('config', 'G-0TQXN51VW3', {
     page_path: window.location.pathname,
-    send_page_view: true,
+    send_page_view: true
   });
+</script>
+
+<!-- Google Analytics 4 -->
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0TQXN51VW3"></script>
+
+<!-- Consent Update Script (for cookie banner integration) -->
+<script is:inline>
+  function updateConsent(consentType, granted) {
+    gtag('consent', 'update', {
+      [consentType]: granted ? 'granted' : 'denied'
+    });
+  }
+  
+  // Example usage for cookie consent banner:
+  // updateConsent('analytics_storage', true); // When user accepts analytics
+  // updateConsent('ad_storage', true); // When user accepts ads
 </script>

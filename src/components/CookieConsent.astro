@@ -1,0 +1,180 @@
+---
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+  es: {
+    title: '🍪 Usamos cookies',
+    description: 'Utilizamos cookies para mejorar tu experiencia y analizar el tráfico del sitio.',
+    accept: 'Aceptar',
+    reject: 'Rechazar',
+    customize: 'Personalizar',
+    acceptAll: 'Aceptar todo',
+    necessary: 'Necesarias',
+    analytics: 'Analíticas',
+    marketing: 'Marketing',
+    save: 'Guardar preferencias',
+    close: 'Cerrar',
+  },
+  en: {
+    title: '🍪 We use cookies',
+    description: 'We use cookies to improve your experience and analyze site traffic.',
+    accept: 'Accept',
+    reject: 'Reject',
+    customize: 'Customize',
+    acceptAll: 'Accept all',
+    necessary: 'Necessary',
+    analytics: 'Analytics',
+    marketing: 'Marketing',
+    save: 'Save preferences',
+    close: 'Close',
+  }
+};
+
+const t = translations[lang as keyof typeof translations] || translations.es;
+---
+
+<div id="cookie-consent" class="fixed bottom-0 left-0 right-0 z-50 hidden">
+  <div class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <div class="flex-1">
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-1">{t.title}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">{t.description}</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button id="cookie-reject" class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            {t.reject}
+          </button>
+          <button id="cookie-accept" class="px-4 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors">
+            {t.acceptAll}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Customization Panel (hidden by default) -->
+<div id="cookie-customize" class="fixed inset-0 z-50 hidden">
+  <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" id="cookie-customize-overlay"></div>
+  <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 rounded-t-2xl shadow-2xl max-h-[80vh] overflow-y-auto">
+    <div class="max-w-xl mx-auto px-6 py-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{t.customize}</h3>
+        <button id="cookie-customize-close" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+          <div>
+            <p class="font-medium text-gray-900 dark:text-white">{t.necessary}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Required for the site to function</p>
+          </div>
+          <input type="checkbox" checked disabled class="w-5 h-5 text-primary-500 rounded" />
+        </div>
+        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+          <div>
+            <p class="font-medium text-gray-900 dark:text-white">{t.analytics}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Help us understand how visitors use our site</p>
+          </div>
+          <input type="checkbox" id="cookie-analytics" class="w-5 h-5 text-primary-500 rounded" />
+        </div>
+        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+          <div>
+            <p class="font-medium text-gray-900 dark:text-white">{t.marketing}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Personalized advertisements and content</p>
+          </div>
+          <input type="checkbox" id="cookie-marketing" class="w-5 h-5 text-primary-500 rounded" />
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end gap-2">
+        <button id="cookie-save" class="px-6 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors">
+          {t.save}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const cookieConsent = document.getElementById('cookie-consent');
+  const cookieCustomize = document.getElementById('cookie-customize');
+  
+  // Check if user has already consented
+  const hasConsent = localStorage.getItem('cookie_consent');
+  
+  if (!hasConsent) {
+    // Show consent banner after a short delay
+    setTimeout(() => {
+      cookieConsent.classList.remove('hidden');
+    }, 1500);
+  }
+  
+  // Accept all cookies
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'all');
+    gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+    cookieConsent.classList.add('hidden');
+  });
+  
+  // Reject all cookies
+  document.getElementById('cookie-reject')?.addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'necessary');
+    gtag('consent', 'update', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+    cookieConsent.classList.add('hidden');
+  });
+  
+  // Show customization panel
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    // Already handled above
+  });
+  
+  // Open customization from main banner (optional button)
+  // Show customize panel
+  document.getElementById('cookie-customize-overlay')?.addEventListener('click', () => {
+    cookieCustomize.classList.add('hidden');
+  });
+  
+  document.getElementById('cookie-customize-close')?.addEventListener('click', () => {
+    cookieCustomize.classList.add('hidden');
+  });
+  
+  // Save customization
+  document.getElementById('cookie-save')?.addEventListener('click', () => {
+    const analytics = document.getElementById('cookie-analytics')?.checked ? 'granted' : 'denied';
+    const marketing = document.getElementById('cookie-marketing')?.checked ? 'granted' : 'denied';
+    
+    gtag('consent', 'update', {
+      analytics_storage: analytics,
+      ad_storage: marketing,
+      ad_user_data: marketing,
+      ad_personalization: marketing
+    });
+    
+    localStorage.setItem('cookie_consent', JSON.stringify({
+      analytics,
+      marketing,
+      timestamp: new Date().toISOString()
+    }));
+    
+    cookieCustomize.classList.add('hidden');
+    cookieConsent.classList.add('hidden');
+  });
+</script>

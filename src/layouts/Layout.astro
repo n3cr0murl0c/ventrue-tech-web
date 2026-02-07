@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import { languages } from '../i18n/ui';
 
 interface Props {
@@ -56,5 +57,6 @@ const url = `https://ventrue.tech${Astro.url.pathname}`;
   </head>
   <body class="min-h-screen">
     <slot />
+    <CookieConsent lang={lang} />
   </body>
 </html>
