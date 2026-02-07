@@ -1,0 +1,92 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const publishedTime = post.data.pubDate.toISOString();
+const author = post.data.author;
+const tags = post.data.tags;
+---
+
+<Layout 
+  title={post.data.title}
+  description={post.data.description}
+  image="/favicon.svg"
+  lang="es"
+  type="article"
+  publishedTime={publishedTime}
+  modifiedTime={publishedTime}
+  author={author}
+  section="Blog"
+  tags={tags}
+>
+  <Navbar />
+
+  <main class="pt-24 pb-16">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <header class="mb-12 text-center">
+        <div class="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+          <time datetime={publishedTime}>
+            {new Date(publishedTime).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </time>
+          {post.data.readTime && (
+            <>
+              <span>•</span>
+              <span>{post.data.readTime} min lectura</span>
+            </>
+          )}
+          <span>•</span>
+          <span>{author}</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">
+          {post.data.title}
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          {post.data.description}
+        </p>
+        <div class="flex flex-wrap justify-center gap-2 mt-6">
+          {tags.map((tag) => (
+            <span class="px-3 py-1 text-sm rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose prose-lg dark:prose-invert mx-auto">
+        <Content />
+      </div>
+
+      <!-- Share -->
+      <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-4">
+          ¿Te gustó este artículo? Compártelo:
+        </p>
+        <div class="flex justify-center gap-4">
+          <a href="#" class="btn-secondary text-sm">
+            Twitter
+          </a>
+          <a href="#" class="btn-secondary text-sm">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
