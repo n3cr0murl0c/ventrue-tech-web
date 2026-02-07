@@ -1,64 +1,141 @@
----
-// Root redirector - auto-detects language based on IP geolocation
----
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=/es/">
-  <title>Redirecting...</title>
+  <title>Ventrue Tech</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #0f172a 50%, #0a0a0f 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-    .loader { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
-    .logo-container { position: relative; width: 80px; height: 80px; }
+    .loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    .logo-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
     .logo {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, #0ea5e9, #00d4ff);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #00d4ff 100%);
       border-radius: 20px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; font-weight: bold; color: white;
-      animation: pulse 2s ease-in-out infinite; z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      animation: pulse 2s ease-in-out infinite;
+      z-index: 2;
+      box-shadow: 0 0 40px rgba(14, 165, 233, 0.4);
     }
     .ring {
-      position: absolute; inset: -10px;
-      border: 3px solid transparent;
-      border-top-color: #0ea5e9;
+      position: absolute;
+      inset: -8px;
+      border: 2px solid transparent;
+      border-top-color: rgba(14, 165, 233, 0.6);
       border-radius: 50%;
-      animation: spin 1s linear infinite;
+      animation: spin 1.5s linear infinite;
     }
-    .ring:nth-child(2) { inset: -20px; border-top-color: #00d4ff; animation-duration: 1.5s; animation-direction: reverse; }
+    .ring:nth-child(2) {
+      inset: -16px;
+      border-top-color: rgba(0, 212, 255, 0.4);
+      animation-duration: 2s;
+      animation-direction: reverse;
+    }
+    .ring:nth-child(3) {
+      inset: -24px;
+      border-top-color: rgba(14, 165, 233, 0.2);
+      animation-duration: 2.5s;
+    }
+    .text {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: fade 2s ease-in-out infinite;
+    }
+    .brand {
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .progress {
+      width: 180px;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0ea5e9, #06b6d4, #00d4ff);
+      border-radius: 2px;
+      animation: progress 1.5s ease-in-out infinite;
+    }
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glow 3s ease-in-out infinite;
+      z-index: -1;
+    }
     @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.9; } }
+    @keyframes pulse { 
+      0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 40px rgba(14, 165, 233, 0.4); } 
+      50% { transform: scale(1.05); opacity: 0.95; box-shadow: 0 0 60px rgba(14, 165, 233, 0.6); } 
+    }
+    @keyframes fade { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @keyframes progress { 0% { width: 0%; margin-left: 0%; } 50% { width: 100%; margin-left: 0%; } 100% { width: 0%; margin-left: 100%; } }
+    @keyframes glow { 0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } }
   </style>
 </head>
 <body>
   <div class="loader">
+    <div class="glow"></div>
+    <p class="brand">Ventrue Tech</p>
     <div class="logo-container">
+      <div class="ring"></div>
       <div class="ring"></div>
       <div class="ring"></div>
       <div class="logo">V</div>
     </div>
+    <p class="text">Loading</p>
+    <div class="progress"><div class="progress-fill"></div></div>
   </div>
   <script is:inline>
-    var spanishCountries = ['ES','MX','AR','CO','PE','CL','EC','GT','CU','BO','DO','SV','HN','NI','PR','PA','UY','PY','GQ','VE'];
-    var timeout = setTimeout(function() { window.location.href = '/es/'; }, 2000);
-    fetch('https://ipapi.co/json/', { timeout: 3000 })
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        clearTimeout(timeout);
-        window.location.href = spanishCountries.indexOf(d.country_code) !== -1 ? '/es/' : '/en/';
-      })
-      .catch(function() { clearTimeout(timeout); window.location.href = '/es/'; });
+    (function() {
+      var spanishCountries = ['ES','MX','AR','CO','PE','CL','EC','GT','CU','BO','DO','SV','HN','NI','PR','PA','UY','PY','GQ','VE'];
+      var timeout = setTimeout(function() { window.location.href = '/es/'; }, 2500);
+      fetch('https://ipapi.co/json/', { timeout: 3000 })
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          clearTimeout(timeout);
+          window.location.href = spanishCountries.indexOf(d.country_code) !== -1 ? '/es/' : '/en/';
+        })
+        .catch(function() { clearTimeout(timeout); window.location.href = '/es/'; });
+    })();
   </script>
 </body>
 </html>
