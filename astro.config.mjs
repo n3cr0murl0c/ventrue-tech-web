@@ -9,9 +9,17 @@ export default defineConfig({
     locales: ['es', 'en'],
     routing: {
       prefixDefaultLocale: false,
+      redirectToDefaultLocale: true,
     },
     fallback: {
       en: 'es',
+    },
+  },
+  vite: {
+    resolve: {
+      alias: {
+        '@': '/src',
+      },
     },
   },
 });
