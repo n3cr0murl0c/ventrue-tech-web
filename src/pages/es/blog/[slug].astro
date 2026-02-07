@@ -14,18 +14,33 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const publishedTime = post.data.pubDate.toISOString();
+const author = post.data.author;
+const tags = post.data.tags;
 ---
 
-<Layout title={post.data.title} lang="es">
+<Layout 
+  title={post.data.title}
+  description={post.data.description}
+  image="/favicon.svg"
+  lang="es"
+  type="article"
+  publishedTime={publishedTime}
+  modifiedTime={publishedTime}
+  author={author}
+  section="Blog"
+  tags={tags}
+>
   <Navbar />
-  
+
   <main class="pt-24 pb-16">
     <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <header class="mb-12 text-center">
         <div class="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
-          <time datetime={post.data.pubDate.toISOString()}>
-            {post.data.pubDate.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+          <time datetime={publishedTime}>
+            {new Date(publishedTime).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
           </time>
           {post.data.readTime && (
             <>
@@ -34,7 +49,7 @@ const { Content } = await post.render();
             </>
           )}
           <span>•</span>
-          <span>{post.data.author}</span>
+          <span>{author}</span>
         </div>
         <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">
           {post.data.title}
@@ -43,7 +58,7 @@ const { Content } = await post.render();
           {post.data.description}
         </p>
         <div class="flex flex-wrap justify-center gap-2 mt-6">
-          {post.data.tags.map((tag) => (
+          {tags.map((tag) => (
             <span class="px-3 py-1 text-sm rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">
               #{tag}
             </span>

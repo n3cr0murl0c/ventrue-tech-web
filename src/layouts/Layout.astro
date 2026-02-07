@@ -1,24 +1,52 @@
 ---
 import '../styles/global.css';
+import SEO from '../components/SEO.astro';
 import { languages } from '../i18n/ui';
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
   lang?: keyof typeof languages;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
 }
 
-const { title, lang = 'es' } = Astro.props;
+const { 
+  title, 
+  description = 'Ventrue Tech - Soluciones Digitales Innovadoras. Transformamos ideas en soluciones digitales que impulsan el crecimiento de tu negocio.',
+  image = '/favicon.svg',
+  lang = 'es',
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
+  tags,
+} = Astro.props;
+
+const url = `https://ventrue.tech${Astro.url.pathname}`;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Ventrue Tech - Soluciones Digitales Innovadoras" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title} | Ventrue Tech</title>
+    <SEO 
+      title={title}
+      description={description}
+      image={image}
+      url={url}
+      type={type}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      author={author}
+      section={section}
+      tags={tags}
+    />
     <script is:inline>
       // Initialize theme before page renders to prevent flash
       const theme = localStorage.getItem('theme') || 
