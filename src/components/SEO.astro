@@ -107,19 +107,28 @@ const jsonLd = {
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-<!-- Google Consent Mode v2 -->
+<!-- Google Consent Mode v2 - ADVANCED MODE -->
 <script is:inline>
+  // Initialize dataLayer BEFORE gtag
   window.dataLayer = window.dataLayer || [];
+  
+  // Advanced Consent Mode v2 - Required for signals to be ACTIVE
   function gtag(){dataLayer.push(arguments);}
   
-  // Default consent settings (GDPR/CCPA compliant)
+  // Set consent mode to 'advanced' (not basic)
   gtag('consent', 'default', {
     'ad_storage': 'denied',
     'ad_user_data': 'denied',
     'ad_personalization': 'denied',
     'analytics_storage': 'denied',
+    
+    // Advanced mode settings
     'wait_for_update': 500,
-    'url_passthrough': true
+    'url_passthrough': true,
+    'debug_mode': true,
+    
+    // Region settings (empty = all regions)
+    'region': ''
   });
   
   // Initialize gtag
@@ -127,23 +136,95 @@ const jsonLd = {
   
   // Google Analytics 4 config
   gtag('config', 'G-0TQXN51VW3', {
-    page_path: window.location.pathname,
-    send_page_view: true
+    'page_path': window.location.pathname,
+    'send_page_view': true,
+    'cookie_flags': 'SameSite=None;Secure'
   });
 </script>
 
 <!-- Google Analytics 4 -->
 <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0TQXN51VW3"></script>
 
-<!-- Consent Update Script (for cookie banner integration) -->
+<!-- Consent Update Functions -->
 <script is:inline>
-  function updateConsent(consentType, granted) {
-    gtag('consent', 'update', {
-      [consentType]: granted ? 'granted' : 'denied'
-    });
-  }
+  // Global consent management object
+  window.VentrueConsent = {
+    granted: false,
+    
+    // Initialize consent from stored preferences
+    init: function() {
+      const stored = localStorage.getItem('ventrue_consent');
+      if (stored) {
+        this.granted = true;
+        this.updateAll(JSON.parse(stored));
+      }
+    },
+    
+    // Update individual consent
+    update: function(type, granted) {
+      gtag('consent', 'update', {
+        [type]: granted ? 'granted' : 'denied'
+      });
+    },
+    
+    // Update all consents at once
+    updateAll: function(preferences) {
+      gtag('consent', 'update', {
+        'analytics_storage': preferences.analytics ? 'granted' : 'denied',
+        'ad_storage': preferences.ads ? 'granted' : 'denied',
+        'ad_user_data': preferences.ads ? 'granted' : 'denied',
+        'ad_personalization': preferences.personalization ? 'granted' : 'denied'
+      });
+    },
+    
+    // Accept all
+    acceptAll: function() {
+      this.granted = true;
+      localStorage.setItem('ventrue_consent', JSON.stringify({
+        analytics: true,
+        ads: true,
+        personalization: true
+      }));
+      this.updateAll(this.getPreferences());
+    },
+    
+    // Reject all
+    rejectAll: function() {
+      this.granted = false;
+      localStorage.setItem('ventrue_consent', JSON.stringify({
+        analytics: false,
+        ads: false,
+        personalization: false
+      }));
+      this.updateAll(this.getPreferences());
+    },
+    
+    // Get current preferences
+    getPreferences: function() {
+      return {
+        analytics: this.granted,
+        ads: this.granted,
+        personalization: this.granted
+      };
+    }
+  };
   
-  // Example usage for cookie consent banner:
-  // updateConsent('analytics_storage', true); // When user accepts analytics
-  // updateConsent('ad_storage', true); // When user accepts ads
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', function() {
+    window.VentrueConsent.init();
+  });
+</script>
+
+<!-- Data Layer for Consent Events -->
+<script is:inline>
+  // Push consent events to dataLayer for GTM tracking
+  window.addEventListener('beforeunload', function() {
+    const consent = window.VentrueConsent ? window.VentrueConsent.getPreferences() : {};
+    window.dataLayer.push({
+      'event': 'consent_update',
+      'consent_analytics': consent.analytics ? 'granted' : 'denied',
+      'consent_ads': consent.ads ? 'granted' : 'denied',
+      'consent_personalization': consent.personalization ? 'granted' : 'denied'
+    });
+  });
 </script>

@@ -7,8 +7,8 @@ const { lang = 'es' } = Astro.props;
 
 const translations = {
   es: {
-    title: '🍪 Usamos cookies',
-    description: 'Utilizamos cookies para mejorar tu experiencia y analizar el tráfico del sitio.',
+    title: '🍪 Preferencias de Privacidad',
+    description: 'Utilizamos cookies y tecnologías similares para mejorar tu experiencia, analizar el tráfico del sitio y mostrar contenido relevante.',
     accept: 'Aceptar',
     reject: 'Rechazar',
     customize: 'Personalizar',
@@ -18,10 +18,12 @@ const translations = {
     marketing: 'Marketing',
     save: 'Guardar preferencias',
     close: 'Cerrar',
+    settings: 'Configuración',
+    privacyLink: 'Política de Privacidad',
   },
   en: {
-    title: '🍪 We use cookies',
-    description: 'We use cookies to improve your experience and analyze site traffic.',
+    title: '🍪 Privacy Preferences',
+    description: 'We use cookies and similar technologies to improve your experience, analyze site traffic, and show relevant content.',
     accept: 'Accept',
     reject: 'Reject',
     customize: 'Customize',
@@ -31,12 +33,15 @@ const translations = {
     marketing: 'Marketing',
     save: 'Save preferences',
     close: 'Close',
+    settings: 'Settings',
+    privacyLink: 'Privacy Policy',
   }
 };
 
 const t = translations[lang as keyof typeof translations] || translations.es;
 ---
 
+<!-- Cookie Consent Banner -->
 <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 z-50 hidden">
   <div class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 py-6">
@@ -44,10 +49,16 @@ const t = translations[lang as keyof typeof translations] || translations.es;
         <div class="flex-1">
           <h3 class="font-semibold text-gray-900 dark:text-white mb-1">{t.title}</h3>
           <p class="text-sm text-gray-600 dark:text-gray-400">{t.description}</p>
+          <a href={`/${lang}/privacy`} class="text-xs text-primary-500 hover:underline mt-1 inline-block">
+            {t.privacyLink}
+          </a>
         </div>
         <div class="flex flex-wrap gap-2">
           <button id="cookie-reject" class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
             {t.reject}
+          </button>
+          <button id="cookie-settings" class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            {t.settings}
           </button>
           <button id="cookie-accept" class="px-4 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors">
             {t.acceptAll}
@@ -58,7 +69,7 @@ const t = translations[lang as keyof typeof translations] || translations.es;
   </div>
 </div>
 
-<!-- Customization Panel (hidden by default) -->
+<!-- Customization Panel -->
 <div id="cookie-customize" class="fixed inset-0 z-50 hidden">
   <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" id="cookie-customize-overlay"></div>
   <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 rounded-t-2xl shadow-2xl max-h-[80vh] overflow-y-auto">
@@ -71,29 +82,34 @@ const t = translations[lang as keyof typeof translations] || translations.es;
           </svg>
         </button>
       </div>
-      <div class="space-y-4">
-        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
-          <div>
-            <p class="font-medium text-gray-900 dark:text-white">{t.necessary}</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Required for the site to function</p>
-          </div>
-          <input type="checkbox" checked disabled class="w-5 h-5 text-primary-500 rounded" />
+      
+      <!-- Necessary Cookies (Always Required) -->
+      <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+        <div>
+          <p class="font-medium text-gray-900 dark:text-white">{t.necessary}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Required for the site to function properly</p>
         </div>
-        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
-          <div>
-            <p class="font-medium text-gray-900 dark:text-white">{t.analytics}</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Help us understand how visitors use our site</p>
-          </div>
-          <input type="checkbox" id="cookie-analytics" class="w-5 h-5 text-primary-500 rounded" />
-        </div>
-        <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
-          <div>
-            <p class="font-medium text-gray-900 dark:text-white">{t.marketing}</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Personalized advertisements and content</p>
-          </div>
-          <input type="checkbox" id="cookie-marketing" class="w-5 h-5 text-primary-500 rounded" />
-        </div>
+        <input type="checkbox" checked disabled class="w-5 h-5 text-primary-500 rounded cursor-not-allowed" />
       </div>
+      
+      <!-- Analytics Cookies -->
+      <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+        <div>
+          <p class="font-medium text-gray-900 dark:text-white">{t.analytics}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Help us understand how visitors use our site</p>
+        </div>
+        <input type="checkbox" id="cookie-analytics" class="w-5 h-5 text-primary-500 rounded cursor-pointer" />
+      </div>
+      
+      <!-- Marketing Cookies -->
+      <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+        <div>
+          <p class="font-medium text-gray-900 dark:text-white">{t.marketing}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Personalized advertisements and content</p>
+        </div>
+        <input type="checkbox" id="cookie-marketing" class="w-5 h-5 text-primary-500 rounded cursor-pointer" />
+      </div>
+      
       <div class="mt-6 flex justify-end gap-2">
         <button id="cookie-save" class="px-6 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors">
           {t.save}
@@ -104,77 +120,104 @@ const t = translations[lang as keyof typeof translations] || translations.es;
 </div>
 
 <script is:inline>
-  const cookieConsent = document.getElementById('cookie-consent');
-  const cookieCustomize = document.getElementById('cookie-customize');
-  
-  // Check if user has already consented
-  const hasConsent = localStorage.getItem('cookie_consent');
-  
-  if (!hasConsent) {
-    // Show consent banner after a short delay
-    setTimeout(() => {
-      cookieConsent.classList.remove('hidden');
-    }, 1500);
-  }
-  
-  // Accept all cookies
-  document.getElementById('cookie-accept')?.addEventListener('click', () => {
-    localStorage.setItem('cookie_consent', 'all');
-    gtag('consent', 'update', {
-      analytics_storage: 'granted',
-      ad_storage: 'granted',
-      ad_user_data: 'granted',
-      ad_personalization: 'granted'
-    });
-    cookieConsent.classList.add('hidden');
-  });
-  
-  // Reject all cookies
-  document.getElementById('cookie-reject')?.addEventListener('click', () => {
-    localStorage.setItem('cookie_consent', 'necessary');
-    gtag('consent', 'update', {
-      analytics_storage: 'denied',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
-    });
-    cookieConsent.classList.add('hidden');
-  });
-  
-  // Show customization panel
-  document.getElementById('cookie-accept')?.addEventListener('click', () => {
-    // Already handled above
-  });
-  
-  // Open customization from main banner (optional button)
-  // Show customize panel
-  document.getElementById('cookie-customize-overlay')?.addEventListener('click', () => {
-    cookieCustomize.classList.add('hidden');
-  });
-  
-  document.getElementById('cookie-customize-close')?.addEventListener('click', () => {
-    cookieCustomize.classList.add('hidden');
-  });
-  
-  // Save customization
-  document.getElementById('cookie-save')?.addEventListener('click', () => {
-    const analytics = document.getElementById('cookie-analytics')?.checked ? 'granted' : 'denied';
-    const marketing = document.getElementById('cookie-marketing')?.checked ? 'granted' : 'denied';
+  (function() {
+    const cookieConsent = document.getElementById('cookie-consent');
+    const cookieCustomize = document.getElementById('cookie-customize');
     
-    gtag('consent', 'update', {
-      analytics_storage: analytics,
-      ad_storage: marketing,
-      ad_user_data: marketing,
-      ad_personalization: marketing
+    // Check if user has already consented
+    const hasConsent = localStorage.getItem('ventrue_consent');
+    
+    if (!hasConsent) {
+      // Show consent banner after delay
+      setTimeout(() => {
+        cookieConsent.classList.remove('hidden');
+      }, 2000);
+    } else {
+      // Apply saved consent if window.VentrueConsent exists
+      if (typeof window.VentrueConsent !== 'undefined') {
+        window.VentrueConsent.init();
+      }
+    }
+    
+    // Accept All
+    document.getElementById('cookie-accept')?.addEventListener('click', () => {
+      if (typeof window.VentrueConsent !== 'undefined') {
+        window.VentrueConsent.acceptAll();
+      } else {
+        gtag('consent', 'update', {
+          analytics_storage: 'granted',
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted'
+        });
+      }
+      cookieConsent.classList.add('hidden');
     });
     
-    localStorage.setItem('cookie_consent', JSON.stringify({
-      analytics,
-      marketing,
-      timestamp: new Date().toISOString()
-    }));
+    // Reject All
+    document.getElementById('cookie-reject')?.addEventListener('click', () => {
+      if (typeof window.VentrueConsent !== 'undefined') {
+        window.VentrueConsent.rejectAll();
+      } else {
+        gtag('consent', 'update', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
+      }
+      cookieConsent.classList.add('hidden');
+    });
     
-    cookieCustomize.classList.add('hidden');
-    cookieConsent.classList.add('hidden');
-  });
+    // Open Settings
+    document.getElementById('cookie-settings')?.addEventListener('click', () => {
+      // Load current preferences if they exist
+      const saved = localStorage.getItem('ventrue_consent');
+      if (saved) {
+        const prefs = JSON.parse(saved);
+        const analyticsCheckbox = document.getElementById('cookie-analytics');
+        const marketingCheckbox = document.getElementById('cookie-marketing');
+        if (analyticsCheckbox) analyticsCheckbox.checked = prefs.analytics;
+        if (marketingCheckbox) marketingCheckbox.checked = prefs.ads || prefs.marketing;
+      }
+      cookieCustomize.classList.remove('hidden');
+    });
+    
+    // Close Settings Overlay
+    document.getElementById('cookie-customize-overlay')?.addEventListener('click', () => {
+      cookieCustomize.classList.add('hidden');
+    });
+    
+    document.getElementById('cookie-customize-close')?.addEventListener('click', () => {
+      cookieCustomize.classList.add('hidden');
+    });
+    
+    // Save Custom Preferences
+    document.getElementById('cookie-save')?.addEventListener('click', () => {
+      const analyticsEl = document.getElementById('cookie-analytics');
+      const marketingEl = document.getElementById('cookie-marketing');
+      
+      const analyticsGranted = analyticsEl ? analyticsEl.checked : false;
+      const marketingGranted = marketingEl ? marketingEl.checked : false;
+      
+      // Save to localStorage
+      localStorage.setItem('ventrue_consent', JSON.stringify({
+        analytics: analyticsGranted,
+        ads: marketingGranted,
+        personalization: marketingGranted,
+        timestamp: new Date().toISOString()
+      }));
+      
+      // Update GA consent
+      gtag('consent', 'update', {
+        analytics_storage: analyticsGranted ? 'granted' : 'denied',
+        ad_storage: marketingGranted ? 'granted' : 'denied',
+        ad_user_data: marketingGranted ? 'granted' : 'denied',
+        ad_personalization: marketingGranted ? 'granted' : 'denied'
+      });
+      
+      cookieCustomize.classList.add('hidden');
+      cookieConsent.classList.add('hidden');
+    });
+  })();
 </script>
