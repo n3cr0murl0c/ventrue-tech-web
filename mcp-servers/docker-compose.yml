@@ -1,0 +1,75 @@
+# =====================================================
+# Docker Compose - Tortoise TTS MCP Server
+# =====================================================
+
+services:
+  tortoise-tts-mcp:
+    build:
+      context: .
+      dockerfile: mcp-servers/Dockerfile
+    container_name: tortoise-tts-mcp
+    platform: linux/amd64
+    
+    # Volume mounts for persistent data
+    volumes:
+      # Models cache (persistent across restarts)
+      - tortoise-models:/home/appuser/.cache/tortoise
+      
+      # Custom voices (add your own voice samples here)
+      - tortoise-voices:/home/appuser/.tortoise
+      
+      # Output directory for generated audio
+      - ./output:/app/output
+    
+    # Environment variables
+    environment:
+      - TORTOISE_MODELS_DIR=/home/appuser/.cache/tortoise
+      - TORTOISE_VOICES_DIR=/home/appuser/.tortoise
+      - OUTPUT_DIR=/app/output
+      - PYTHONUNBUFFERED=1
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    
+    # Auto-restart policy
+    restart: unless-stopped
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          # GPU recommended for faster inference
+          # nvidia.com/gpu: 1
+          memory: 4G
+        reservations:
+          memory: 2G
+    
+    # Network (optional - for HTTP server mode)
+    # ports:
+    #   - "8080:8080"
+
+# Named volumes for persistence
+volumes:
+  tortoise-models:
+    driver: local
+  tortoise-voices:
+    driver: local
+
+# Usage:
+# ====================================
+# Development:
+#   docker compose up --build
+#
+# Production:
+#   docker compose -f docker-compose.yml up -d
+#
+# View logs:
+#   docker compose logs -f tortoise-tts-mcp
+#
+# Rebuild:
+#   docker compose build --no-cache tortoise-tts-mcp

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "tortoise-tts": {
+      "command": "python",
+      "args": [
+        "/home/n3cr0murl0c/.openclaw/workspace/ventrue-tech-web/mcp-servers/tortoise_tts_mcp.py"
+      ],
+      "env": {
+        "TORTOISE_MODELS_DIR": "~/.cache/tortoise/models",
+        "TORTOISE_VOICES_DIR": "~/.tortoise/voices"
+      }
+    }
+  }
+}

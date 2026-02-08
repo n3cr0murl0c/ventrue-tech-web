@@ -1,0 +1,33 @@
+# Tortoise TTS MCP Server Dependencies
+# ====================================
+
+# Core TTS
+tortoise-tts>=0.1.0
+
+# MCP Protocol
+mcp>=0.9.0
+
+# Audio processing
+pydub>=0.25.1
+soundfile>=0.12.1
+librosa>=0.10.0
+
+# Image processing (for video generation)
+Pillow>=9.0.0
+
+# Video processing
+opencv-python>=4.8.0
+
+# Whisper for subtitles
+openai-whisper>=20231117
+
+# HTTP requests
+httpx>=0.25.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+
+# Development (optional)
+# torch>=2.0.0  # Uncomment for GPU support
+# torchaudio>=2.0.0
