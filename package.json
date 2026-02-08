@@ -4,11 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && cp public/index.html dist/index.html",
+    "build": "astro build && cp public/index.html dist/index.html && node generate-sitemap.cjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
     "astro": "4.5.18"
   },
   "devDependencies": {
