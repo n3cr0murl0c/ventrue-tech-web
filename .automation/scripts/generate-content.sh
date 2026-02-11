@@ -305,7 +305,7 @@ READTIME=$((3 + RANDOM % 7))
 ARTICLE="---
 title: \"${TITLE} - ${TODAY}\"
 description: \"Contenido generado automáticamente sobre ${KEY} para developers latinoamericanos.\"
-pubDate: \"${TODAY}\"
+pubDate: ${TODAY}
 author: \"Ventrue Tech Team\"
 tags: [\"${KEY}\", \"tutorial\", \"2026\"]
 lang: \"es\"
