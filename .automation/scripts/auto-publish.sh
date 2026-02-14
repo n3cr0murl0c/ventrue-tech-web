@@ -46,7 +46,7 @@ esac
 ARTICLE=$(cat <<EOF
 ---
 title: "${TITLE} $(date +%Y)"
-description: "Contenido automático generado para el ${TODAY}"
+description: "${TITLE} $(date +%Y)"
 pubDate: ${TODAY}
 author: "Ventrue Tech Team"
 tags: ["${TOPIC}", "automation", "2026"]
@@ -57,7 +57,6 @@ readTime: 5
 
 # ${TITLE}
 
-Este es un artículo generado automáticamente el ${TODAY}.
 
 ## Puntos Clave
 
