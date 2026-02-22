@@ -182,6 +182,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"post-20260214090007.md": {
+	id: "post-20260214090007.md";
+  slug: "post-20260214090007";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "typescript-avanzado.md": {
 	id: "typescript-avanzado.md";
   slug: "typescript-avanzado";

@@ -1,0 +1,153 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-02-17",
+  "company": {
+    "name": "Ventrue Technologies",
+    "shortName": "Ventrue Tech",
+    "legalName": "Ventrue Technologies S.A.S.",
+    "founded": 2024,
+    "headquarters": "Ecuador",
+    "industry": "Technology / Software Development / Digital Solutions",
+    "website": "https://ventrue.tech",
+    "email": "hello@ventrue.tech",
+    "social": {
+      "twitter": "@ventrue_tech",
+      "github": "ventrue-tech",
+      "linkedin": ""
+    },
+    "taglines": {
+      "es": "Transformamos ideas en soluciones digitales innovadoras",
+      "en": "We transform ideas into innovative digital solutions"
+    }
+  },
+  "mission": {
+    "es": "Empoderar a empresas y desarrolladores con herramientas tecnológicas de vanguardia que impulsan la innovación y el crecimiento sostenible.",
+    "en": "Empowering companies and developers with cutting-edge technological tools that drive innovation and sustainable growth."
+  },
+  "vision": {
+    "es": "Ser líderes globales en soluciones tecnológicas que transforman la forma en que el mundo desarrolla software.",
+    "en": "To be global leaders in technological solutions that transform how the world develops software."
+  },
+  "values": [
+    {
+      "key": "innovation",
+      "name": {
+        "es": "Innovación",
+        "en": "Innovation"
+      },
+      "description": {
+        "es": "Constantemente pushing boundaries and exploring new technologies",
+        "en": "Constantly pushing boundaries and exploring new technologies"
+      }
+    },
+    {
+      "key": "quality",
+      "name": {
+        "es": "Calidad",
+        "en": "Quality"
+      },
+      "description": {
+        "es": "Entregando excelencia en cada línea de código y proyecto",
+        "en": "Delivering excellence in every line of code and project"
+      }
+    },
+    {
+      "key": "integrity",
+      "name": {
+        "es": "Integridad",
+        "en": "Integrity"
+      },
+      "description": {
+        "es": "Transparente, honesto y ético en todos los tratos",
+        "en": "Transparent, honest, and ethical in all dealings"
+      }
+    },
+    {
+      "key": "collaboration",
+      "name": {
+        "es": "Colaboración",
+        "en": "Collaboration"
+      },
+      "description": {
+        "es": "Trabajando juntos para lograr resultados extraordinarios",
+        "en": "Working together to achieve extraordinary results"
+      }
+    }
+  ],
+  "colors": {
+    "primary": {
+      "dark": "#0a0a0f",
+      "darker": "#050508"
+    },
+    "accent": {
+      "cyan": "#00d4ff",
+      "purple": "#7c3aed",
+      "blue": "#0ea5e9"
+    },
+    "surface": {
+      "default": "#1e293b",
+      "light": "#334155",
+      "border": "#475569"
+    },
+    "text": {
+      "primary": "#ffffff",
+      "secondary": "#94a3b8",
+      "muted": "#64748b"
+    }
+  },
+  "gradients": {
+    "primary": "linear-gradient(135deg, #00d4ff 0%, #0ea5e9 50%, #7c3aed 100%)",
+    "dark": "linear-gradient(135deg, #0a0a0f 0%, #0f172a 50%, #0a0a0f 100%)",
+    "accent": "linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #00d4ff 100%)"
+  },
+  "typography": {
+    "fonts": {
+      "sans": ["Inter", "system-ui", "sans-serif"],
+      "display": ["Cal Sans", "Inter", "sans-serif"],
+      "mono": ["JetBrains Mono", "monospace"]
+    }
+  },
+  "products": [
+    {
+      "name": "FinHelper",
+      "description": "Personal finance management app",
+      "status": "active"
+    },
+    {
+      "name": "Ventrue Web",
+      "description": "Corporate website builder platform",
+      "status": "development"
+    }
+  ],
+  "services": [
+    {
+      "name": "Corporate Websites",
+      "description": "Custom web solutions",
+      "targetMarket": "Businesses, startups"
+    },
+    {
+      "name": "Mobile Applications",
+      "description": "iOS/Android development",
+      "targetMarket": "Companies needing mobile apps"
+    },
+    {
+      "name": "APIs & Backend",
+      "description": "Scalable server solutions",
+      "targetMarket": "Developers, enterprises"
+    },
+    {
+      "name": "Technical Consulting",
+      "description": "Strategy and architecture",
+      "targetMarket": "CTOs, technical leaders"
+    }
+  ],
+  "sovi": {
+    "framework": "SOVI 2.0",
+    "principles": {
+      "S": "Solution-Oriented - Focus on solving high-value problems",
+      "O": "Omnichannel Engagement - Seamless presence across all touchpoints",
+      "V": "Value-Driven - Communicate inherent value, not just price",
+      "I": "Informative - Build trust through transparency and education"
+    }
+  }
+}

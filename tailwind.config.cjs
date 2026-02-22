@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Primary Blue Scale
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -18,21 +19,46 @@ export default {
           900: '#0c4a6e',
           950: '#082f49',
         },
+        // Ventrue Brand Colors
         ventrue: {
           dark: '#0a0a0f',
           darker: '#050508',
           accent: '#00d4ff',
           secondary: '#7c3aed',
+          blue: '#0ea5e9',
+        },
+        // Surface Colors
+        surface: {
+          DEFAULT: '#1e293b',
+          light: '#334155',
+          border: '#475569',
+        },
+        // Text Colors
+        text: {
+          primary: '#ffffff',
+          secondary: '#94a3b8',
+          muted: '#64748b',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Cal Sans', 'Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(135deg, #00d4ff 0%, #0ea5e9 50%, #7c3aed 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #0a0a0f 0%, #0f172a 50%, #0a0a0f 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #00d4ff 100%)',
+      },
+      boxShadow: {
+        'glow-cyan': '0 0 40px rgba(0, 212, 255, 0.4)',
+        'glow-purple': '0 0 40px rgba(124, 58, 237, 0.4)',
       },
       animation: {
         'gradient': 'gradient 8s ease infinite',
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         gradient: {
