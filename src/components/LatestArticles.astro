@@ -1,0 +1,80 @@
+---
+export interface ArticleItem {
+  href: string;
+  date: string;
+  readTime: string;
+  title: string;
+  description: string;
+  readMoreText: string;
+}
+
+export interface Props {
+  title: string;
+  viewAllHref: string;
+  viewAllText: string;
+  articles: ArticleItem[];
+}
+
+const { title, viewAllHref, viewAllText, articles } = Astro.props;
+---
+
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-display font-bold">
+        {title}
+      </h2>
+      <a
+        href={viewAllHref}
+        class="text-primary-500 hover:text-primary-600 font-medium flex items-center gap-1"
+      >
+        {viewAllText}
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {articles.map((article) => (
+        <a
+          href={article.href}
+          class="group card card-light dark:card-dark"
+        >
+          <div class="p-6">
+            <div
+              class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3"
+            >
+              <span>{article.date}</span>
+              <span>•</span>
+              <span>{article.readTime}</span>
+            </div>
+            <h3
+              class="text-lg font-semibold mb-2 group-hover:text-primary-500 transition-colors"
+            >
+              {article.title}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+              {article.description}
+            </p>
+            <span
+              class="text-primary-500 text-sm font-medium group-hover:underline"
+            >
+              {article.readMoreText} →
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

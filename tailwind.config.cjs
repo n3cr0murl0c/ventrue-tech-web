@@ -44,6 +44,10 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Cal Sans', 'Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+        // Sci-fi / schematic system (Stitch-approved design direction)
+        tactical: ['Space Grotesk', 'Inter', 'sans-serif'],
+        body: ['Geist', 'Inter', 'sans-serif'],
+        data: ['JetBrains Mono', 'monospace'],
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, #00d4ff 0%, #0ea5e9 50%, #7c3aed 100%)',
@@ -59,6 +63,12 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        // Sci-fi / schematic
+        'scan-vertical': 'scanVertical 4s linear infinite',
+        'scan-horizontal': 'scanHorizontal 3s linear infinite',
+        'node-pulse': 'nodePulse 2s infinite',
+        'flicker': 'flicker 0.2s infinite alternate',
+        'radar-sweep': 'spin 4s linear infinite',
       },
       keyframes: {
         gradient: {
@@ -72,6 +82,26 @@ export default {
         glow: {
           '0%': { boxShadow: '0 0 20px rgba(0, 212, 255, 0.3)' },
           '100%': { boxShadow: '0 0 40px rgba(0, 212, 255, 0.6)' },
+        },
+        scanVertical: {
+          '0%': { transform: 'translateY(-100vh)' },
+          '100%': { transform: 'translateY(200vh)' },
+        },
+        scanHorizontal: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        nodePulse: {
+          '0%': { boxShadow: '0 0 0 0 rgba(0, 212, 255, 0.8)' },
+          '70%': { boxShadow: '0 0 0 12px rgba(0, 212, 255, 0)' },
+          '100%': { boxShadow: '0 0 0 0 rgba(0, 212, 255, 0)' },
+        },
+        flicker: {
+          '0%': { opacity: '0.95' },
+          '5%': { opacity: '0.85' },
+          '10%': { opacity: '1' },
+          '15%': { opacity: '0.9' },
+          '100%': { opacity: '1' },
         },
       },
     },

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ventrue Tech — V letter mark, master source.
+  Canvas: 1024x1024, full bleed, no rounded corners (platforms apply their own masks).
+  Gradient: 135deg #0ea5e9 → #06b6d4 → #00d4ff (brand "accent" gradient).
+  V mark: white, path-based (no font dependency).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="brandAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="50%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Square background, full bleed -->
+  <rect width="1024" height="1024" fill="url(#brandAccent)"/>
+
+  <!-- V letter mark, path-based -->
+  <path
+    d="M 240 270 L 350 270 L 512 640 L 674 270 L 784 270 L 512 800 Z"
+    fill="#ffffff"
+    stroke="#ffffff"
+    stroke-width="0"
+    stroke-linejoin="round"
+  />
+</svg>

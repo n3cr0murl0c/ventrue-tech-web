@@ -2,223 +2,178 @@
 import Layout from '@/layouts/Layout.astro';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import HeroSpotlight from '@/components/HeroSpotlight.astro';
+import MissionVision from '@/components/MissionVision.astro';
+import ValuesSection from '@/components/ValuesSection.astro';
+import FeaturedProjects from '@/components/FeaturedProjects.astro';
+import LatestArticles from '@/components/LatestArticles.astro';
+import CTASection from '@/components/CTASection.astro';
+
+// ── SVG icon fragments ────────────────────────────────────
+const BOLT_SVG =
+  '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>';
+const EYE_SVG =
+  '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
+
+// ── Hero spotlight items (auto-rotating featured projects + blog posts) ──
+const SPOTLIGHT_ITEMS = [
+  {
+    kind: "PROJECT",
+    title: "FinHelper",
+    description:
+      "Financial calculator in Flutter with AdMob monetization and a .NET backend.",
+    href: "/en/projects/finhelper",
+    meta: "Flutter · .NET · AdMob",
+    ctaText: "Open project ›",
+    badge: "F",
+  },
+  {
+    kind: "ARTICLE",
+    title: "How to Improve Your Code in 2026",
+    description:
+      "Best practices, tools, and techniques to elevate your developer skills.",
+    href: "/en/blog/mejorar-codigo-2026",
+    meta: "8 min · Feb 7, 2026",
+    ctaText: "Read article ›",
+    badge: "C",
+  },
+  {
+    kind: "SERVICE",
+    title: "AI & Automation",
+    description:
+      "LLMs, agentic workflows, and content pipelines. We build and operate.",
+    href: "/en/servicios",
+    meta: "3–12 weeks · Custom quote",
+    ctaText: "Let's talk ›",
+    badge: "AI",
+  },
+  {
+    kind: "ARTICLE",
+    title: "Advanced TypeScript Tips",
+    description:
+      "Master TypeScript with advanced tips that will save you hours of debugging.",
+    href: "/en/blog/typescript-avanzado",
+    meta: "6 min · Feb 7, 2026",
+    ctaText: "Read article ›",
+    badge: "T",
+  },
+];
 ---
 
 <Layout title="Home" lang="en">
   <Navbar />
   
   <main>
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <!-- Background Gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-transparent to-ventrue-accent/20 dark:from-primary-900/30 dark:to-ventrue-accent/10"></div>
-      
-      <!-- Animated Shapes -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-500/30 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 ventrue-accent/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
-      </div>
+    <HeroSection
+      statusText="System Status: Optimal"
+      headingLine1="Software, cloud,"
+      headingAccent="and automation"
+      headingLine2="delivered as a service."
+      description="An engineering practice that designs, builds, and operates end-to-end systems. Your on-demand engineering team — software, cloud architecture, DevOps, and AI."
+      ctaHref="/en/servicios"
+      ctaText="View Services"
+      secondaryHref="/en/contact"
+      secondaryText="Let's Talk"
+    >
+      <HeroSpotlight
+        slot="right-panel"
+        items={SPOTLIGHT_ITEMS}
+        figLabel="FIG 01 // BROADCAST_FEED"
+      />
+    </HeroSection>
 
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-        <h1 class="text-5xl md:text-7xl font-display font-bold mb-6">
-          <span class="gradient-text">We transform ideas</span>
-          <br />
-          <span class="dark:text-white text-gray-900">into digital solutions</span>
-        </h1>
-        
-        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 text-balance">
-          We are Ventrue Tech, your technology partner to create innovative software that drives your business growth.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/en/projects" class="btn-primary inline-flex items-center gap-2">
-            View Projects
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-          <a href="/en/contact" class="btn-secondary inline-flex items-center gap-2">
-            Contact Us
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
+    <MissionVision
+      mission={{
+        svgIcon: BOLT_SVG,
+        title: "Our Mission",
+        text: "Help companies and technical teams build, scale, and operate quality software — without having to assemble three separate vendors.",
+        gradientFrom: "#0ea5e9",
+        gradientTo: "#0284c7",
+      }}
+      vision={{
+        svgIcon: EYE_SVG,
+        title: "Our Vision",
+        text: "Be the reference engineering practice in Latin America for companies that need speed without sacrificing architecture.",
+        gradientFrom: "#00d4ff",
+        gradientTo: "#0ea5e9",
+      }}
+    />
 
-    <!-- Mission & Vision -->
-    <section class="py-24 bg-gray-50 dark:bg-ventrue-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12">
-          <!-- Mission -->
-          <div class="card card-light dark:card-dark p-8">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
-            <p class="text-gray-600 dark:text-gray-300">
-              Empowering companies and developers with cutting-edge technological tools that drive innovation and sustainable growth in an ever-evolving digital world.
-            </p>
-          </div>
+    <ValuesSection
+      title="Our Values"
+      subtitle="The values that define us and guide every decision we make."
+      values={[
+        {
+          emoji: "🎯",
+          title: "Ownership",
+          description: "We own the outcome end-to-end — from architecture to 3 AM pages.",
+        },
+        {
+          emoji: "⭐",
+          title: "Quality",
+          description: "We write code, write tests, and write runbooks. All three.",
+        },
+        {
+          emoji: "🔍",
+          title: "Transparency",
+          description: "Honest estimates and tradeoffs — even when it costs us the engagement.",
+        },
+        {
+          emoji: "⚙️",
+          title: "Pragmatism",
+          description: "The simplest architecture that solves the problem, not the most impressive one.",
+        },
+      ]}
+    />
 
-          <!-- Vision -->
-          <div class="card card-light dark:card-dark p-8">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-ventrue-accent to-primary-500 flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-            </div>
-            <h2 class="text-2xl font-bold mb-4">Our Vision</h2>
-            <p class="text-gray-600 dark:text-gray-300">
-              To be global leaders in technological solutions that transform how the world develops software, setting new standards of excellence and innovation.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <FeaturedProjects
+      title="Latest Projects"
+      viewAllHref="/en/projects"
+      viewAllText="View all"
+      projects={[
+        {
+          href: "/en/projects/finhelper",
+          gradientFrom: "#0ea5e9",
+          gradientTo: "#00d4ff",
+          imageContent: "F",
+          title: "FinHelper App",
+          description: "Financial calculator in Flutter with AdMob monetization.",
+          technologies: ["Flutter", ".NET", "AdMob"],
+        },
+      ]}
+    />
 
-    <!-- Values -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Our Values</h2>
-          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            The values that define us and guide every decision we make.
-          </p>
-        </div>
+    <LatestArticles
+      title="Latest Articles"
+      viewAllHref="/en/blog"
+      viewAllText="View all"
+      articles={[
+        {
+          href: "/en/blog/mejorar-codigo-2026",
+          date: "Feb 7, 2026",
+          readTime: "8 min read",
+          title: "How to Improve Your Code in 2026",
+          description: "Discover the best practices, tools, and techniques to elevate your developer skills.",
+          readMoreText: "Read more",
+        },
+        {
+          href: "/en/blog/typescript-avanzado",
+          date: "Feb 7, 2026",
+          readTime: "6 min read",
+          title: "Advanced TypeScript Tips",
+          description: "Master TypeScript with these advanced tips that will save you hours of debugging.",
+          readMoreText: "Read more",
+        },
+      ]}
+    />
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { icon: '💡', title: 'Innovation', desc: 'We always seek new ways to solve problems' },
-            { icon: '⭐', title: 'Quality', desc: 'We never compromise excellence' },
-            { icon: '🤝', title: 'Integrity', desc: 'We act with honesty and transparency' },
-            { icon: '👥', title: 'Collaboration', desc: 'We believe in the power of teamwork' },
-          ].map((value) => (
-            <div class="card card-light dark:card-dark text-center p-6">
-              <div class="text-4xl mb-4">{value.icon}</div>
-              <h3 class="text-xl font-semibold mb-2">{value.title}</h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">{value.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Projects -->
-    <section class="py-24 bg-gray-50 dark:bg-ventrue-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-display font-bold">Latest Projects</h2>
-          <a href="/en/projects" class="text-primary-500 hover:text-primary-600 font-medium flex items-center gap-1">
-            View all
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Project Card -->
-          <a href="/en/projects/finhelper" class="group card card-light dark:card-dark overflow-hidden">
-            <div class="aspect-video bg-gradient-to-br from-primary-500 to-ventrue-accent flex items-center justify-center">
-              <span class="text-4xl font-bold text-white">F</span>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2 group-hover:text-primary-500 transition-colors">FinHelper App</h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                Financial calculator in Flutter with AdMob monetization.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                {['Flutter', '.NET', 'AdMob'].map((tech) => (
-                  <span class="px-2 py-1 text-xs rounded-lg bg-gray-100 dark:bg-white/10">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Latest Articles -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-display font-bold">Latest Articles</h2>
-          <a href="/en/blog" class="text-primary-500 hover:text-primary-600 font-medium flex items-center gap-1">
-            View all
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Article Card -->
-          <a href="/en/blog/mejorar-codigo-2026" class="group card card-light dark:card-dark">
-            <div class="p-6">
-              <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                <span>Feb 7, 2026</span>
-                <span>•</span>
-                <span>8 min read</span>
-              </div>
-              <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-500 transition-colors">
-                How to Improve Your Code in 2026
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                Discover the best practices, tools, and techniques to elevate your developer skills.
-              </p>
-              <span class="text-primary-500 text-sm font-medium group-hover:underline">
-                Read more →
-              </span>
-            </div>
-          </a>
-
-          <!-- Article Card -->
-          <a href="/en/blog/typescript-avanzado" class="group card card-light dark:card-dark">
-            <div class="p-6">
-              <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                <span>Feb 7, 2026</span>
-                <span>•</span>
-                <span>6 min read</span>
-              </div>
-              <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-500 transition-colors">
-                Advanced TypeScript Tips
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                Master TypeScript with these advanced tips that will save you hours of debugging.
-              </p>
-              <span class="text-primary-500 text-sm font-medium group-hover:underline">
-                Read more →
-              </span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-24 bg-gradient-to-r from-primary-500 to-ventrue-accent">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-          Ready to transform your project?
-        </h2>
-        <p class="text-xl text-white/80 mb-8">
-          Let's talk about how we can help you achieve your technology goals.
-        </p>
-        <a href="/en/contact" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors">
-          Contact Us Now
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-      </div>
-    </section>
+    <CTASection
+      title="Ready to transform your project?"
+      description="Let's talk about how we can help you achieve your technology goals."
+      ctaHref="/en/contact"
+      ctaText="Contact Us Now"
+    />
   </main>
 
   <Footer />

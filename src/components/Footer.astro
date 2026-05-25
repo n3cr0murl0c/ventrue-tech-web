@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
 
 <footer class="bg-gray-100 dark:bg-ventrue-darker border-t border-gray-200 dark:border-gray-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
       <!-- Brand -->
       <div class="col-span-1 md:col-span-2">
         <a href={`/${lang}`} class="flex items-center gap-2 mb-4">
@@ -19,9 +19,9 @@ const currentYear = new Date().getFullYear();
           <span class="text-xl font-display font-bold gradient-text">Ventrue Tech</span>
         </a>
         <p class="text-gray-600 dark:text-gray-400 max-w-md">
-          {lang === 'es' 
-            ? 'Transformando ideas en soluciones digitales innovadoras. Impulsando la innovación tecnológica.'
-            : 'Transforming ideas into innovative digital solutions. Driving technological innovation.'
+          {lang === 'es'
+            ? 'Software, cloud y automatización como servicio. Diseñamos, construimos y operamos sistemas de extremo a extremo.'
+            : 'Software, cloud, and automation — delivered as a service. We design, build, and operate end-to-end systems.'
           }
         </p>
         <div class="flex gap-4 mt-6">
@@ -56,9 +56,20 @@ const currentYear = new Date().getFullYear();
           {lang === 'es' ? 'Contacto' : 'Contact'}
         </h4>
         <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-          <li>info@ventrue.tech</li>
+          <li><a href="mailto:hello@ventrue.tech" class="hover:text-primary-500 transition-colors">hello@ventrue.tech</a></li>
           <li>Quito, Ecuador</li>
           <li>+593 99 202 4767</li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="font-semibold mb-4">
+          {lang === 'es' ? 'Legal' : 'Legal'}
+        </h4>
+        <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+          <li><a href={lang === 'es' ? '/es/privacidad' : '/en/privacy'} class="hover:text-primary-500 transition-colors">{lang === 'es' ? 'Privacidad' : 'Privacy'}</a></li>
+          <li><a href={lang === 'es' ? '/es/terminos' : '/en/terms'} class="hover:text-primary-500 transition-colors">{lang === 'es' ? 'Términos' : 'Terms'}</a></li>
         </ul>
       </div>
     </div>

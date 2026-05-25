@@ -1,0 +1,82 @@
+---
+export interface ServiceCard {
+  title: string;
+  description: string;
+  href: string;
+  svgIcon: string;
+  gradientFrom: string; // hex, e.g. "#0ea5e9"
+  gradientTo: string;   // hex, e.g. "#0284c7"
+}
+
+export interface Props {
+  title: string;
+  subtitle: string;
+  services: ServiceCard[];
+  viewAllHref: string;
+  viewAllText: string;
+}
+
+const { title, subtitle, services, viewAllHref, viewAllText } = Astro.props;
+---
+
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+        {title}
+      </h2>
+      <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((service) => (
+        <a
+          href={service.href}
+          class="group card card-light dark:card-dark p-6 hover:border-ventrue-accent/50 transition-all"
+        >
+          <div
+            class="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+            style={`background: linear-gradient(135deg, ${service.gradientFrom}, ${service.gradientTo})`}
+          >
+            <span class="text-white w-7 h-7" set:html={service.svgIcon} />
+          </div>
+          <h3
+            class="text-lg font-semibold mb-2 group-hover:text-ventrue-accent transition-colors"
+          >
+            {service.title}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+            {service.description}
+          </p>
+          <span class="text-ventrue-accent text-sm font-medium"
+            >Conversemos →</span
+          >
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center mt-10">
+      <a
+        href={viewAllHref}
+        class="btn-secondary inline-flex items-center gap-2"
+      >
+        {viewAllText}
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

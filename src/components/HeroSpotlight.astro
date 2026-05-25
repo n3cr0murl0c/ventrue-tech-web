@@ -1,0 +1,254 @@
+---
+/**
+ * HeroSpotlight — tactical auto-rotating broadcast feed for the hero right-panel.
+ *
+ * Replaces the static radar/sphere visual with functional content: cycles through
+ * featured projects and blog posts every few seconds with a scan-style transition.
+ *
+ * - Auto-rotates every `intervalMs` (default 5000ms)
+ * - Manual prev/next controls
+ * - Pause on hover
+ * - Respects prefers-reduced-motion (static, shows first item)
+ * - Tactical HUD overlay matches the rest of the schematic aesthetic
+ */
+
+export interface SpotlightItem {
+  /** "PROJECT" or "BLOG" — used as the type label */
+  kind: string;
+  /** Title shown in tactical caps */
+  title: string;
+  /** One-sentence description */
+  description: string;
+  /** Link target */
+  href: string;
+  /** Meta line: tech stack, read time, date, etc. Optional. */
+  meta?: string;
+  /** CTA label, default "Open" */
+  ctaText?: string;
+  /** Single character used as image placeholder when no real image is supplied */
+  badge?: string;
+}
+
+export interface Props {
+  items: SpotlightItem[];
+  intervalMs?: number;
+  figLabel?: string;
+}
+
+const {
+  items,
+  intervalMs = 5000,
+  figLabel = "FIG 02 // BROADCAST_FEED",
+} = Astro.props;
+
+const totalLabel = items.length.toString().padStart(2, "0");
+---
+
+<div
+  class="hero-spotlight glass-panel p-2 rounded-sm w-full max-w-[340px] aspect-[3/4] relative overflow-hidden"
+  data-interval={intervalMs}
+  data-total={items.length}
+>
+  <!-- HUD: top-left label -->
+  <div
+    class="absolute top-3 left-3 font-mono text-[10px] text-ventrue-accent uppercase z-30 font-semibold tracking-tactical pointer-events-none"
+  >
+    {figLabel}<br />
+    <span class="text-ventrue-accent/70">
+      <span data-spotlight-counter="current">01</span> / {totalLabel}
+    </span>
+  </div>
+
+  <!-- HUD: top-right status -->
+  <div
+    class="absolute top-3 right-3 flex items-center gap-2 z-30 font-mono text-[10px] text-ventrue-accent uppercase tracking-tactical font-semibold pointer-events-none"
+  >
+    <span class="pulse-node"></span>
+    <span data-spotlight-status>AUTO</span>
+  </div>
+
+  <!-- HUD: bottom-right bars -->
+  <div class="absolute bottom-3 right-3 flex gap-1 z-30 pointer-events-none">
+    <div
+      class="w-1.5 h-4 bg-ventrue-accent shadow-[0_0_5px_rgba(0,212,255,0.8)]"
+    >
+    </div>
+    <div class="w-1.5 h-4 bg-ventrue-accent/70"></div>
+    <div class="w-1.5 h-4 bg-ventrue-accent/40"></div>
+  </div>
+
+  <!-- Scan line — animates on slide change -->
+  <div
+    class="hero-spotlight-scan absolute top-0 left-0 w-full h-px bg-ventrue-accent shadow-[0_0_8px_#00d4ff] opacity-70 z-20 pointer-events-none"
+  >
+  </div>
+
+  <!-- Slides -->
+  <div
+    class="w-full h-full bg-black/60 border border-ventrue-accent/30 relative"
+  >
+    {
+      items.map((item, i) => (
+        <a
+          href={item.href}
+          class:list={[
+            "hero-spotlight-slide absolute inset-0 flex flex-col justify-between p-6 transition-opacity duration-500",
+            i === 0 ? "opacity-100" : "opacity-0 pointer-events-none",
+          ]}
+          data-spotlight-index={i}
+        >
+          {/* Big badge — gradient placeholder character */}
+          <div class="flex-1 flex items-center justify-center">
+            <div class="relative w-full h-32 flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-br from-ventrue-accent/20 via-transparent to-ventrue-secondary/20 rounded-sm" />
+              <span
+                class="relative font-tactical text-7xl font-bold text-white/40"
+                style="text-shadow: 0 0 20px rgba(0,212,255,0.5);"
+              >
+                {item.badge ?? item.title.charAt(0)}
+              </span>
+            </div>
+          </div>
+
+          {/* Type label */}
+          <div class="font-mono text-[10px] text-ventrue-accent uppercase tracking-tactical font-semibold mt-4">
+            // {item.kind}
+          </div>
+
+          {/* Title */}
+          <h3 class="font-tactical text-lg text-white uppercase leading-tight mt-1">
+            {item.title}
+          </h3>
+
+          {/* Description */}
+          <p class="font-body text-xs text-gray-400 mt-2 leading-relaxed">
+            {item.description}
+          </p>
+
+          {/* Meta line */}
+          {item.meta && (
+            <div class="font-mono text-[10px] text-ventrue-accent/60 mt-2 tracking-tactical">
+              {item.meta}
+            </div>
+          )}
+
+          {/* CTA */}
+          <div class="mt-3 flex items-center justify-between border-t border-ventrue-accent/20 pt-3">
+            <span class="font-mono text-[10px] text-ventrue-accent uppercase tracking-tactical font-semibold">
+              {item.ctaText ?? "Open ›"}
+            </span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+
+  <!-- Manual controls -->
+  <div
+    class="absolute bottom-3 left-3 flex items-center gap-1.5 z-30"
+  >
+    <button
+      type="button"
+      class="hero-spotlight-prev w-6 h-6 flex items-center justify-center border border-ventrue-accent/40 text-ventrue-accent hover:bg-ventrue-accent/15 transition-colors rounded-sm"
+      aria-label="Previous featured item"
+    >
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button
+      type="button"
+      class="hero-spotlight-next w-6 h-6 flex items-center justify-center border border-ventrue-accent/40 text-ventrue-accent hover:bg-ventrue-accent/15 transition-colors rounded-sm"
+      aria-label="Next featured item"
+    >
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const PREFERS_REDUCED = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  document.querySelectorAll<HTMLElement>(".hero-spotlight").forEach((root) => {
+    const slides = root.querySelectorAll<HTMLElement>(".hero-spotlight-slide");
+    const counter = root.querySelector<HTMLElement>(
+      "[data-spotlight-counter='current']"
+    );
+    const status = root.querySelector<HTMLElement>("[data-spotlight-status]");
+    const scan = root.querySelector<HTMLElement>(".hero-spotlight-scan");
+    const prev = root.querySelector<HTMLButtonElement>(".hero-spotlight-prev");
+    const next = root.querySelector<HTMLButtonElement>(".hero-spotlight-next");
+    const total = slides.length;
+    if (total <= 1) return;
+
+    const interval = parseInt(root.dataset.interval ?? "5000", 10);
+    let current = 0;
+    let timer: number | null = null;
+    let paused = false;
+
+    function show(idx: number) {
+      slides.forEach((s, i) => {
+        const active = i === idx;
+        s.classList.toggle("opacity-100", active);
+        s.classList.toggle("opacity-0", !active);
+        s.classList.toggle("pointer-events-none", !active);
+      });
+      if (counter) {
+        counter.textContent = String(idx + 1).padStart(2, "0");
+      }
+      if (scan && !PREFERS_REDUCED) {
+        scan.style.animation = "none";
+        scan.offsetHeight; // reflow
+        scan.style.animation = "scanVertical 1.2s linear 1";
+      }
+    }
+
+    function go(delta: number) {
+      current = (current + delta + total) % total;
+      show(current);
+    }
+
+    function start() {
+      if (PREFERS_REDUCED || paused) return;
+      stop();
+      timer = window.setInterval(() => go(1), interval);
+      if (status) status.textContent = "AUTO";
+    }
+
+    function stop() {
+      if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    prev?.addEventListener("click", () => {
+      go(-1);
+      paused = true;
+      if (status) status.textContent = "MANUAL";
+      stop();
+    });
+    next?.addEventListener("click", () => {
+      go(1);
+      paused = true;
+      if (status) status.textContent = "MANUAL";
+      stop();
+    });
+
+    root.addEventListener("mouseenter", () => {
+      paused = true;
+      if (status) status.textContent = "PAUSED";
+      stop();
+    });
+    root.addEventListener("mouseleave", () => {
+      paused = false;
+      start();
+    });
+
+    start();
+  });
+</script>

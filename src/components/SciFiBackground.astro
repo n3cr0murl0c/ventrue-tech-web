@@ -1,0 +1,141 @@
+---
+/**
+ * SciFiBackground — the "schematic / tactical" background layer.
+ *
+ * Stack (back to front, all z-indexed below z-10):
+ *   - <canvas> starfield with warp-speed effect (JS animation, mobile-adjusted)
+ *   - 32px engineering grid overlay (CSS)
+ *   - horizontal scanning line (CSS keyframe)
+ *   - CRT scanlines overlay (CSS)
+ *
+ * All animations respect prefers-reduced-motion. On reduced-motion the canvas
+ * shows a static starfield and the scan line is hidden.
+ *
+ * Wrapped in a single <div> so page content can sit above it with `position: relative; z-10`.
+ */
+
+interface Props {
+  /** Override the default star count. Mobile auto-reduces to ~200. */
+  starCount?: number;
+}
+
+const { starCount = 800 } = Astro.props;
+---
+
+<div class="sci-fi-background pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+  <canvas id="starfield-canvas" class="absolute inset-0 w-full h-full"></canvas>
+  <div class="absolute inset-0 bg-grid-overlay"></div>
+  <div class="scan-line absolute top-0 left-0 w-full h-0.5 opacity-30 animate-scan-vertical"
+       style="background: linear-gradient(to right, transparent, #00d4ff, transparent); box-shadow: 0 0 10px #00d4ff;"></div>
+  <div class="absolute inset-0 crt-overlay opacity-10"></div>
+</div>
+
+<script is:inline define:vars={{ starCount }}>
+  (function initStarfield() {
+    const canvas = document.getElementById('starfield-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const NUM_STARS = isMobile ? Math.min(starCount, 200) : starCount;
+    const MAX_DEPTH = 1000;
+    const SPEED = prefersReducedMotion ? 0 : 15;
+    const STAR_COLORS = ['#ffffff', '#00d4ff', '#a8e8ff', '#0ea5e9'];
+
+    let width = 0, height = 0;
+    let cx = 0, cy = 0;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      cx = width / 2;
+      cy = height / 2;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const stars = [];
+    for (let i = 0; i < NUM_STARS; i++) {
+      stars.push({
+        x: (Math.random() - 0.5) * width * 2,
+        y: (Math.random() - 0.5) * height * 2,
+        z: Math.random() * MAX_DEPTH,
+        prevZ: 0,
+        color: Math.random() < 0.85 ? '#ffffff' : STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
+      });
+      stars[i].prevZ = stars[i].z;
+    }
+
+    function draw() {
+      // slight trail fade
+      ctx.fillStyle = 'rgba(5, 5, 8, 0.4)';
+      ctx.fillRect(0, 0, width, height);
+
+      for (const s of stars) {
+        s.prevZ = s.z;
+        s.z -= SPEED;
+        if (s.z <= 0) {
+          s.z = MAX_DEPTH;
+          s.x = (Math.random() - 0.5) * width * 2;
+          s.y = (Math.random() - 0.5) * height * 2;
+          s.prevZ = s.z;
+        }
+        const sx = (s.x / s.z) * 1000 + cx;
+        const sy = (s.y / s.z) * 1000 + cy;
+        const px = (s.x / s.prevZ) * 1000 + cx;
+        const py = (s.y / s.prevZ) * 1000 + cy;
+        const size = (1 - s.z / MAX_DEPTH) * 3;
+        const alpha = 1 - s.z / MAX_DEPTH;
+        if (sx < 0 || sx > width || sy < 0 || sy > height) continue;
+
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(sx, sy);
+        ctx.strokeStyle = s.color;
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = size;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(sx, sy, size, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.fill();
+      }
+
+      if (!prefersReducedMotion) {
+        requestAnimationFrame(draw);
+      }
+    }
+
+    // Render once for reduced-motion; animate otherwise.
+    if (prefersReducedMotion) {
+      // Static distribution: skip the warp streaks, just draw still points.
+      ctx.fillStyle = '#050508';
+      ctx.fillRect(0, 0, width, height);
+      for (const s of stars) {
+        const sx = (s.x / s.z) * 1000 + cx;
+        const sy = (s.y / s.z) * 1000 + cy;
+        const size = (1 - s.z / MAX_DEPTH) * 2;
+        if (sx < 0 || sx > width || sy < 0 || sy > height) continue;
+        ctx.beginPath();
+        ctx.arc(sx, sy, size, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = 1 - s.z / MAX_DEPTH;
+        ctx.fill();
+      }
+    } else {
+      requestAnimationFrame(draw);
+    }
+  })();
+</script>
+
+<style>
+  /* Hide the horizontal scan line for reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .scan-line {
+      display: none;
+    }
+  }
+</style>

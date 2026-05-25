@@ -1,7 +1,7 @@
 # Ventrue Technologies - Company Branding Document
 
-**Version**: 1.0.0
-**Last Updated**: 2026-02-17
+**Version**: 2.0.0
+**Last Updated**: 2026-05-24
 **Status**: Active
 **Owner**: Ventrue Technologies
 
@@ -17,57 +17,88 @@
 | **Short Name** | Ventrue Tech |
 | **Legal Name** | Ventrue Technologies S.A.S. |
 | **Founded** | 2024 |
-| **Headquarters** | Ecuador |
-| **Business Type** | Technology / Software Development / Digital Solutions |
+| **Founder & Principal** | Erick Escobar |
+| **Headquarters** | Quito, Ecuador |
+| **Business Type** | Engineering practice — software, cloud, DevOps, AI/automation |
 | **Tax ID** | [To be added] |
 
-### 1.2 Taglines
+### 1.2 Positioning Statement
+
+> Ventrue Tech is a founder-led engineering practice that delivers software, cloud architecture, DevOps, and AI-driven automation as a single service. We operate as your on-demand engineering team — from technical design through production operations — for startups and growth-stage companies across Latin America and Spain.
+
+### 1.3 Taglines
 
 | Language | Tagline |
 |----------|---------|
-| **Spanish (ES)** | "Transformamos ideas en soluciones digitales innovadoras" |
-| **English (EN)** | "We transform ideas into innovative digital solutions" |
+| **Spanish (ES)** | "Software, cloud y automatización como servicio." |
+| **English (EN)** | "Software, cloud, and automation — delivered as a service." |
 
-### 1.3 Contact Information
+#### Secondary / supporting lines
+
+| Language | Line |
+|----------|------|
+| **ES (descriptiva)** | "Diseñamos, construimos y operamos sistemas de extremo a extremo." |
+| **EN (descriptive)** | "We design, build, and operate end-to-end systems." |
+
+### 1.4 Contact Information
 
 | Channel | Information |
 |---------|-------------|
 | **Website** | https://ventrue.tech |
 | **Email** | hello@ventrue.tech |
+| **WhatsApp / Phone** | +593 99 202 4767 |
 | **Twitter/X** | @ventrue_tech |
 | **GitHub** | github.com/ventrue-tech |
-| **LinkedIn** | [To be added] |
+| **LinkedIn** | [To be added — both company and Erick Escobar's profile] |
+| **TikTok** | [To be added — handle pending SaaS product launch] |
 
 ---
 
-## 2. Mission, Vision & Values
+## 2. Founder
 
-### 2.1 Mission Statement
+### 2.1 Erick Escobar — Founder & Principal Engineer
 
-> **Spanish**: "Empoderar a empresas y desarrolladores con herramientas tecnológicas de vanguardia que impulsan la innovación y el crecimiento sostenible."
+Multi-disciplinary engineer leading Ventrue Tech across four practice areas:
 
-> **English**: "Empowering companies and developers with cutting-edge technological tools that drive innovation and sustainable growth."
+- **Full-Stack Software Engineering** — Flutter, .NET, TypeScript/React, Node.js
+- **Cloud Architecture** — AWS, Azure, cloud-native design, multi-region patterns
+- **DevOps & Site Reliability** — CI/CD, IaC (Terraform), observability, on-call playbooks
+- **AI & Automation Engineering** — LLM integrations, workflow automation, agentic systems
 
-### 2.2 Vision Statement
+Founded Ventrue Tech in 2024 to deliver the full stack of modern engineering work — design, build, and operate — through a single accountable practice rather than through three separate vendors.
 
-> **Spanish**: "Ser líderes globales en soluciones tecnológicas que transforman la forma en que el mundo desarrolla software."
-
-> **English**: "To be global leaders in technological solutions that transform how the world develops software."
-
-### 2.3 Core Values
-
-| Value | Spanish | English | Description | Behavior |
-|-------|---------|---------|-------------|----------|
-| **Innovation** | Innovación | Innovation | Constantly pushing boundaries and exploring new technologies | We embrace new technologies, experiment with emerging tools, and challenge the status quo in software development |
-| **Quality** | Calidad | Quality | Delivering excellence in every line of code and project | We follow best practices, write clean code, test thoroughly, and never compromise on deliverable quality |
-| **Integrity** | Integridad | Integrity | Transparent, honest, and ethical in all dealings | We are transparent with clients, honest in our estimates, and ethical in all business practices |
-| **Collaboration** | Colaboración | Collaboration | Working together to achieve extraordinary results | We believe the best solutions come from diverse teams working in synergy with our clients |
+Voice note: Ventrue Tech speaks in the first-person plural ("we") because the practice operates with rotating collaborators on larger engagements. The founder is named on all client-facing materials so clients know who they are hiring.
 
 ---
 
-## 3. Brand Identity
+## 3. Mission, Vision & Values
 
-### 3.1 Color Palette
+### 3.1 Mission Statement
+
+> **Spanish**: "Ayudar a empresas y equipos técnicos a construir, escalar y operar software de calidad — sin tener que ensamblar tres proveedores distintos."
+
+> **English**: "Help companies and technical teams build, scale, and operate quality software — without having to assemble three separate vendors."
+
+### 3.2 Vision Statement
+
+> **Spanish**: "Ser la práctica de ingeniería de referencia en Latinoamérica para empresas que necesitan velocidad sin sacrificar arquitectura."
+
+> **English**: "Be the reference engineering practice in Latin America for companies that need speed without sacrificing architecture."
+
+### 3.3 Core Values
+
+| Value | Spanish | English | Behavior |
+|-------|---------|---------|----------|
+| **Ownership** | Responsabilidad | Ownership | We own the outcome end-to-end — from the architecture decision to the 3 AM page when something breaks |
+| **Quality** | Calidad | Quality | We write code, write tests, and write runbooks. All three. |
+| **Transparency** | Transparencia | Transparency | Honest estimates, honest scope, honest tradeoffs — even when it costs the engagement |
+| **Pragmatism** | Pragmatismo | Pragmatism | We pick the simplest architecture that solves the actual problem, not the most impressive one |
+
+---
+
+## 4. Brand Identity
+
+### 4.1 Color Palette
 
 #### Primary Colors
 
@@ -95,6 +126,17 @@
 | **Text Secondary** | `#94a3b8` | 148, 163, 184 | Secondary text, descriptions |
 | **Text Muted** | `#64748b` | 100, 116, 139 | Disabled text, placeholders |
 
+#### Print / CMYK Equivalents
+
+Use these CMYK values for print collateral (business cards, brochures). Hex-to-CMYK conversion is approximate; the print shop should fine-tune on proof.
+
+| Color | Hex | CMYK (approx.) |
+|-------|-----|----------------|
+| Primary Dark | `#0a0a0f` | C75 M70 Y65 K90 |
+| Accent Cyan | `#00d4ff` | C70 M5 Y0 K0 |
+| Secondary Purple | `#7c3aed` | C72 M85 Y0 K0 |
+| Primary Blue | `#0ea5e9` | C82 M30 Y0 K0 |
+
 #### Gradient Definitions
 
 ```css
@@ -108,7 +150,7 @@ background: linear-gradient(135deg, #0a0a0f 0%, #0f172a 50%, #0a0a0f 100%);
 box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
 ```
 
-### 3.2 Typography
+### 4.2 Typography
 
 #### Font Families
 
@@ -127,19 +169,7 @@ box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
 | Semi-Bold | 600 | Subheadings, emphasis |
 | Bold | 700 | Headings, CTAs |
 
-#### Type Scale
-
-| Element | Size (Desktop) | Size (Mobile) | Weight | Line Height |
-|---------|----------------|---------------|--------|-------------|
-| H1 | 4rem (64px) | 2.5rem (40px) | 700 | 1.1 |
-| H2 | 3rem (48px) | 2rem (32px) | 700 | 1.2 |
-| H3 | 2rem (32px) | 1.5rem (24px) | 600 | 1.3 |
-| H4 | 1.5rem (24px) | 1.25rem (20px) | 600 | 1.4 |
-| Body | 1rem (16px) | 1rem (16px) | 400 | 1.6 |
-| Small | 0.875rem (14px) | 0.875rem (14px) | 400 | 1.5 |
-| Caption | 0.75rem (12px) | 0.75rem (12px) | 400 | 1.4 |
-
-### 3.3 Logo Usage
+### 4.3 Logo Usage
 
 #### Primary Logo ("V" Letter Mark)
 
@@ -155,68 +185,74 @@ box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
 - **Color**: White (#ffffff) on dark backgrounds
 - **Usage**: Headers, footers, marketing materials
 
-#### Logo Clear Space
+#### Required asset sizes
 
-- Minimum clear space around logo: 1x logo height
-- Do not place logo near other graphic elements
-- Ensure sufficient contrast with background
+For platform submissions and print:
 
-#### Logo Do's and Don'ts
-
-| Do | Don't |
-|----|-------|
-| Use on dark backgrounds | Stretch or distort proportions |
-| Maintain gradient colors | Add effects (shadows, glows) unless specified |
-| Use at clear sizes (min 32px) | Place on busy backgrounds without contrast |
-| Keep consistent across platforms | Modify colors without approval |
+| Asset | Size | Format | Purpose |
+|-------|------|--------|---------|
+| Favicon | 32×32, 16×16 | ICO/PNG | Browser tab |
+| App icon (TikTok/Meta) | 1024×1024 | PNG | Developer portal submissions |
+| App icon (Play Store) | 512×512 | PNG | Google Play Store listing |
+| App icon (App Store) | 1024×1024 | PNG | Apple App Store listing |
+| Card front | 85×55mm + 3mm bleed | PDF (CMYK) | Print business card |
+| Open Graph | 1200×630 | PNG | Social link previews |
 
 ---
 
-## 4. Products & Services
+## 5. Products & Services
 
-### 4.1 Products
+### 5.1 Products
 
 | Product | Description | Status | Launch Date |
 |---------|-------------|--------|--------------|
-| **FinHelper** | Personal finance management app | Active | 2024 |
-| **Ventrue Web** | Corporate website builder platform | Development | TBD |
+| **FinHelper** | Personal finance management app (Flutter + .NET + AdMob) | Active | 2024 |
+| **Ventrue Social** (working name) | Multi-client AI-driven social content automation SaaS — TikTok, Instagram, LinkedIn | In development | Pending TikTok production review |
+| **Ventrue Web** | Corporate website builder platform | Backlog | TBD |
 
-### 4.2 Services
+### 5.2 Services
 
-| Service | Description | Target Market |
-|---------|-------------|---------------|
-| **Corporate Websites** | Custom web solutions | Businesses, startups |
-| **Mobile Applications** | iOS/Android development | Companies needing mobile apps |
-| **APIs & Backend** | Scalable server solutions | Developers, enterprises |
-| **Technical Consulting** | Strategy and architecture | CTOs, technical leaders |
+Ordered by lead positioning (high-ticket / differentiated first).
+
+> **Internal pricing only — do NOT publish on the website.** Erick's stated reason (2026-05-24): publishing prices anchors clients and removes negotiation room. The website shows "Cotización a medida" / "Custom quote" CTAs everywhere. These ranges are sales reference for proposal-writing only.
+
+| # | Service | Description | Target Market | Internal range (USD) | Timeline |
+|---|---------|-------------|---------------|----------------------|----------|
+| 1 | **Cloud Architecture** | Multi-region, cloud-native design + migration on AWS or Azure | CTOs, growth-stage startups | $4k – $30k <!-- internal draft --> | 2–6 weeks |
+| 2 | **DevOps & SRE** | CI/CD, IaC (Terraform), observability, on-call playbooks. Project or monthly retainer | Engineering leads, ops-light teams | $3k – $25k or $2.5k/mo retainer <!-- internal draft --> | 2–8 weeks |
+| 3 | **AI & Automation** | LLM integrations, agentic workflows, internal-tool automation, content pipelines | Operators, marketing, content teams | $5k – $50k <!-- internal draft --> | 3–12 weeks |
+| 4 | **Mobile Applications** | iOS & Android with Flutter or React Native + backend | Companies needing mobile apps | $15k – $60k | 8–16 weeks |
+| 5 | **APIs & Backend** | Scalable RESTful + event-driven backends | Developers, enterprises | $5k – $25k | 4–10 weeks |
+| 6 | **Corporate Websites** | Conversion-optimized sites with SEO + analytics + CMS | Businesses, startups | $800 – $3.5k | 2–6 weeks |
+| 7 | **Fractional CTO / Tech Advisory** | Strategy, architecture audits, hiring, fractional leadership | Founders, technical leaders | $2k – $50k | 2–8 weeks |
 
 ---
 
-## 5. Marketing Framework (SOVI 2.0)
+## 6. Marketing Framework (SOVI 2.0)
 
 Ventrue Technologies uses the SOVI framework for all marketing initiatives:
 
-### 5.1 Solution-Oriented (S)
+### 6.1 Solution-Oriented (S)
 
 - Focus on solving high-value problems
 - Frame all products/services as solutions to critical pain points
 - Research and prioritize opportunities with highest ROI
 
-### 5.2 Omnichannel Engagement (O)
+### 6.2 Omnichannel Engagement (O)
 
 - Seamless presence across all touchpoints
 - Digital: Website, blog, social media, email
 - Frictionless conversion and customer reach
 - Consistent experience across channels
 
-### 5.3 Value-Driven (V)
+### 6.3 Value-Driven (V)
 
 - Communicate inherent value, not just price
 - Focus on ROI and customer success metrics
 - Premium positioning justified by superior outcomes
 - Clear articulation of differentiation
 
-### 5.4 Informative (I)
+### 6.4 Informative (I)
 
 - Build trust through transparency
 - Share knowledge freely (tutorials, best practices)
@@ -225,51 +261,53 @@ Ventrue Technologies uses the SOVI framework for all marketing initiatives:
 
 ---
 
-## 6. Content Strategy
+## 7. Content Strategy
 
-### 6.1 Blog
+### 7.1 Blog
 
 | Aspect | Details |
 |--------|---------|
 | **Focus** | Technical tutorials, industry insights, company news |
 | **Languages** | Spanish (primary), English (secondary) |
 | **Frequency** | Daily automated posting |
-| **Channels** | Blog, Twitter/X, GitHub |
+| **Channels** | Blog, Twitter/X, GitHub, TikTok (post-launch) |
 | **Authors** | Ventrue Tech team members |
 
-### 6.2 Social Media
+### 7.2 Social Media
 
 | Platform | Handle | Purpose |
 |----------|--------|---------|
 | **Twitter/X** | @ventrue_tech | Tech news, updates, engagement |
 | **GitHub** | ventrue-tech | Open source, code showcase |
+| **TikTok** | [Pending] | Short-form dev content; also the dogfooded surface for Ventrue Social |
+| **LinkedIn** | [To be added] | B2B reach, founder thought leadership |
 
-### 6.3 Content Guidelines
+### 7.3 Content Guidelines
 
-- All content must align with brand voice: professional yet approachable
-- Technical content should be accurate and well-researched
+- All content must align with brand voice: professional yet approachable, technically honest
+- Technical content should be accurate and well-researched — Ventrue Tech's reputation rests on this
 - Spanish content takes precedence for Latin American audience
-- English content for global reach
+- English content for global reach and developer community
 
 ---
 
-## 7. Technical Standards
+## 8. Technical Standards
 
-### 7.1 Code Quality
+### 8.1 Code Quality
 
 - All code follows industry best practices
 - TypeScript strict mode enabled
 - ESLint/Prettier for consistent formatting
 - Comprehensive testing required
 
-### 7.2 Design Principles
+### 8.2 Design Principles
 
 - Accessibility: WCAG 2.1 AA compliance
 - Performance: Core Web Vitals targets
 - Responsive: Mobile-first approach
 - Dark mode support preferred
 
-### 7.3 Security
+### 8.3 Security
 
 - HTTPS only
 - Secure authentication flows
@@ -278,15 +316,16 @@ Ventrue Technologies uses the SOVI framework for all marketing initiatives:
 
 ---
 
-## 8. Version History
+## 9. Version History
 
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
 | 1.0.0 | 2026-02-17 | Initial branding document | Ventrue Tech |
+| 2.0.0 | 2026-05-24 | Rewrote positioning to reflect founder-led multi-disciplinary practice (SWE + Cloud + DevOps + AI/Automation). Added founder section, expanded services 4 → 7, added Ventrue Social SaaS, fixed half-English value descriptions, added print/CMYK + platform-asset sizing tables, replaced generic agency mission/vision with practice-specific framing. | Ventrue Tech |
 
 ---
 
-## 9. References
+## 10. References
 
 This document should be referenced by:
 
@@ -294,5 +333,6 @@ This document should be referenced by:
 - Marketing materials
 - Brand partnerships
 - External communications
+- Platform submissions (TikTok, Meta, Play Store, App Store)
 
 For questions or updates, contact: hello@ventrue.tech

@@ -1,0 +1,21 @@
+{
+  "type": "schedule",
+  "date": "2026-05-26T13:00:00.000Z",
+  "shortLink": true,
+  "tags": ["pymes", "ecuador", "whatsapp"],
+  "posts": [
+    {
+      "integration": { "id": "REPLACE_WITH_POSTIZ_CHANNEL_INSTAGRAM_SMB" },
+      "value": [
+        {
+          "content": "Una peluquería en Quito perdía 4 clientes al día por no contestar WhatsApp después de las 6pm.\n\nLe montamos un asistente que responde precios, horarios y agenda citas, 24/7. Setup en 2 días. Costo: menos que un corte de cabello al mes.\n\nDM 'demo' y te armo una con TUS datos para que la pruebes — gratis, sin compromiso.\n\n#PymesEcuador #Quito #AsistentesIA #WhatsAppBusiness #Emprendimiento #Peluqueria",
+          "image": []
+        }
+      ],
+      "settings": {
+        "__type": "instagram",
+        "post_type": "post"
+      }
+    }
+  ]
+}

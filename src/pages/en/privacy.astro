@@ -1,0 +1,199 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+
+const lastUpdated = '2026-05-24';
+const effectiveDate = '2026-05-24';
+---
+
+<Layout
+  title="Privacy Policy | Ventrue Tech"
+  description="How Ventrue Technologies collects, uses, stores, and protects your personal data — including data handled by our social automation services."
+  lang="en"
+>
+  <Navbar />
+
+  <main class="pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <p class="text-ventrue-accent text-sm font-medium tracking-wide uppercase mb-3">Legal</p>
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">Privacy Policy</h1>
+        <p class="text-gray-400">
+          Effective: <time datetime={effectiveDate}>{effectiveDate}</time> ·
+          Last updated: <time datetime={lastUpdated}>{lastUpdated}</time> · Version 1.0
+        </p>
+        <p class="text-gray-500 text-sm mt-3">
+          A Spanish version is available at <a href="/es/privacidad" class="text-ventrue-accent hover:underline">/es/privacidad</a>.
+        </p>
+      </header>
+
+      <article class="prose prose-invert prose-lg max-w-none">
+        <section>
+          <h2>1. Who we are</h2>
+          <p>
+            This Privacy Policy describes how <strong>Ventrue Technologies S.A.S.</strong> ("Ventrue Tech", "we", "us") collects, uses, and protects your personal data when you visit
+            <a href="https://ventrue.tech">ventrue.tech</a>, contact us, or use any of our products and services — including <em>Ventrue Social</em>, our multi-client content automation platform that connects to third-party platforms such as TikTok, Instagram, and LinkedIn on your behalf.
+          </p>
+          <p>
+            We are a software engineering practice headquartered in Quito, Ecuador. The data controller responsible for the processing described in this policy is Ventrue Technologies S.A.S., represented by its founder <strong>Erick Escobar</strong>. You can reach us at <a href="mailto:hello@ventrue.tech">hello@ventrue.tech</a> for any privacy-related question.
+          </p>
+        </section>
+
+        <section>
+          <h2>2. Scope</h2>
+          <p>This policy applies to personal data we process in three contexts:</p>
+          <ul>
+            <li><strong>Marketing website</strong> — visitors to ventrue.tech, including users who submit our contact form.</li>
+            <li><strong>Ventrue Social SaaS</strong> — businesses, creators, and operators who connect their TikTok, Instagram, and/or LinkedIn accounts to our platform so that we can schedule and publish content on their behalf.</li>
+            <li><strong>Client engagements</strong> — companies that hire us for software, cloud, DevOps, or AI/automation services.</li>
+          </ul>
+          <p>It does <em>not</em> cover the privacy practices of third-party platforms (e.g. TikTok, Meta, LinkedIn, Google) that you authorize us to interact with. Those platforms have their own privacy policies, and you remain subject to them.</p>
+        </section>
+
+        <section>
+          <h2>3. Data we collect</h2>
+
+          <h3>3.1 From website visitors</h3>
+          <ul>
+            <li><strong>Contact form submissions</strong>: name, email, optional phone, service of interest, budget range, and the project description you write. Submitted via Formspree to our inbox.</li>
+            <li><strong>Analytics</strong>: standard usage data such as pages viewed, referrer, device type, approximate location (country/region), and anonymized IP address, collected via Google Analytics 4.</li>
+            <li><strong>Cookies</strong>: see <a href="#cookies">section 11</a>.</li>
+          </ul>
+
+          <h3>3.2 From Ventrue Social SaaS users</h3>
+          <p>When you create a Ventrue Social account and connect a social platform, we collect and store:</p>
+          <ul>
+            <li><strong>Account information</strong>: email, display name, password hash, and account preferences.</li>
+            <li><strong>OAuth credentials</strong>: access tokens and refresh tokens issued by TikTok, Instagram, LinkedIn, and similar platforms, scoped to the permissions you explicitly grant during the OAuth consent screen. We never see or store your platform passwords.</li>
+            <li><strong>Connected-account metadata</strong>: your TikTok/Instagram/LinkedIn username, user ID, display name, and (where the platform provides them) public profile fields.</li>
+            <li><strong>Content you create or schedule</strong>: text, images, video files, captions, hashtags, schedules, and the platforms you target. Stored in our infrastructure for as long as you keep the post scheduled or want it accessible in your history.</li>
+            <li><strong>Posting results and telemetry</strong>: success/failure logs, platform response codes, and metrics that the connected platform exposes (e.g. number of views, likes, comments). Used to show you analytics in your dashboard and to retry failed posts.</li>
+            <li><strong>AI prompts and outputs</strong> (where you use AI features): the prompts you send and the generated drafts we return, retained to provide history and improve service quality.</li>
+          </ul>
+
+          <h3>3.3 From client engagements</h3>
+          <ul>
+            <li><strong>Business and billing data</strong>: company name, tax ID where applicable, contact persons, invoicing email and address, and payment records.</li>
+            <li><strong>Project data</strong>: any documents, credentials, or system access you share with us during an engagement, handled under the confidentiality terms of our service agreement.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>4. How we use your data</h2>
+          <p>We process personal data for the following purposes, on the legal bases indicated:</p>
+          <ul>
+            <li><strong>To provide the services you request</strong> — including publishing content to your connected social accounts, generating AI drafts, sending you product emails, and supporting client engagements. <em>Legal basis: performance of a contract.</em></li>
+            <li><strong>To respond to contact-form inquiries</strong>. <em>Legal basis: legitimate interest in answering prospective clients, and your consent when you submit the form.</em></li>
+            <li><strong>To improve and secure our products</strong> — analytics, error monitoring, fraud detection, abuse prevention. <em>Legal basis: legitimate interest.</em></li>
+            <li><strong>To comply with legal obligations</strong> — including responding to lawful requests from competent authorities. <em>Legal basis: legal obligation.</em></li>
+            <li><strong>To send service updates and, where you consent, marketing</strong>. <em>Legal basis: legitimate interest for transactional emails; consent for marketing.</em></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>5. Third-party services we use</h2>
+          <p>To operate our products we rely on the following processors. Each is a separate data controller for the data it independently collects, and a data processor when it handles data on our instructions:</p>
+          <ul>
+            <li><strong>TikTok</strong> — receiving and posting content on accounts you connect.</li>
+            <li><strong>Meta (Instagram, Facebook)</strong> — same purpose, where you connect those accounts.</li>
+            <li><strong>LinkedIn</strong> — same purpose.</li>
+            <li><strong>Google Analytics 4</strong> — anonymized website usage analytics.</li>
+            <li><strong>Formspree</strong> — delivery of contact-form submissions to our inbox.</li>
+            <li><strong>Cloud infrastructure</strong>: AWS and/or Microsoft Azure — application hosting, database, file storage.</li>
+            <li><strong>AI model providers</strong>: Anthropic and OpenAI — generation of draft content when you use AI features. Prompts and outputs are transmitted to these providers under their data-processing terms. We do not allow these providers to train their models on your data.</li>
+            <li><strong>Email and messaging</strong>: Google Workspace (for hello@ventrue.tech).</li>
+          </ul>
+          <p>We sign data-processing agreements with each processor and review them for adequate security and privacy practices.</p>
+        </section>
+
+        <section>
+          <h2>6. Data sharing and disclosure</h2>
+          <p>We do <strong>not</strong> sell your personal data. We share it only:</p>
+          <ul>
+            <li>With the processors listed in section 5, strictly to operate our services;</li>
+            <li>With the social platforms you have authorized — for the content and metadata you direct us to publish to those platforms;</li>
+            <li>With our professional advisors (legal, accounting) under confidentiality;</li>
+            <li>When required by law, court order, or to protect rights, property, or safety;</li>
+            <li>In the event of a merger, acquisition, or asset sale, in which case we will notify affected users in advance.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>7. Data retention</h2>
+          <ul>
+            <li><strong>Contact-form submissions</strong>: retained for up to 24 months after the last contact, then deleted, unless an active engagement requires longer retention.</li>
+            <li><strong>Ventrue Social account data</strong>: retained while your account is active. After you delete your account, we delete personal data within <strong>30 days</strong>, except for records we must keep for legal, tax, or accounting purposes (typically up to 7 years under Ecuadorian law).</li>
+            <li><strong>OAuth tokens</strong>: retained while the connection is active and revoked immediately when you disconnect the platform or delete your account. We do not keep tokens after revocation.</li>
+            <li><strong>Scheduled content</strong>: retained while pending and for 90 days after posting, then archived in summary form for your analytics history.</li>
+            <li><strong>Logs and analytics</strong>: typically 13 months for analytics, 90 days for application logs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>8. Your rights</h2>
+          <p>Under Ecuador's <em>Ley Orgánica de Protección de Datos Personales</em> (LOPDP) and, where applicable, the EU General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA), you have the right to:</p>
+          <ul>
+            <li><strong>Access</strong> the personal data we hold about you;</li>
+            <li><strong>Rectify</strong> inaccurate or incomplete data;</li>
+            <li><strong>Delete</strong> your data ("right to be forgotten");</li>
+            <li><strong>Restrict</strong> or <strong>object</strong> to certain processing, including profiling;</li>
+            <li><strong>Receive</strong> your data in a portable, machine-readable format;</li>
+            <li><strong>Withdraw consent</strong> at any time, without affecting the lawfulness of previous processing;</li>
+            <li><strong>Lodge a complaint</strong> with a supervisory authority — in Ecuador, the <em>Superintendencia de Protección de Datos Personales</em>.</li>
+          </ul>
+          <p>To exercise any of these rights, email <a href="mailto:hello@ventrue.tech">hello@ventrue.tech</a> with the subject line "Privacy Request". We will respond within 15 business days.</p>
+        </section>
+
+        <section>
+          <h2>9. How to revoke access and delete your data</h2>
+          <p>You can disconnect any social platform from Ventrue Social at any time through the in-app settings. Doing so immediately revokes the OAuth token we hold and deletes the connected-account metadata.</p>
+          <p>You can also revoke our access directly from the platform: for TikTok, visit your account's <em>Manage app permissions</em> page; for Instagram and Facebook, visit <em>Apps and Websites</em> in your Meta account settings; for LinkedIn, visit <em>Permitted Services</em>.</p>
+          <p>To delete your Ventrue Social account entirely, email us at <a href="mailto:hello@ventrue.tech">hello@ventrue.tech</a>. We will confirm deletion within 30 days.</p>
+        </section>
+
+        <section>
+          <h2>10. International transfers</h2>
+          <p>Because our infrastructure providers and AI providers operate globally, your personal data may be transferred to and processed in countries outside Ecuador, including the United States and the European Union. We rely on Standard Contractual Clauses and equivalent safeguards where required.</p>
+        </section>
+
+        <section id="cookies">
+          <h2>11. Cookies</h2>
+          <p>We use a minimal set of cookies:</p>
+          <ul>
+            <li><strong>Essential cookies</strong>: for theme preference (dark/light mode) and language selection. These do not require consent.</li>
+            <li><strong>Analytics cookies</strong>: Google Analytics 4 with IP anonymization. These respect your "Do Not Track" signal where supported.</li>
+          </ul>
+          <p>You can control cookies through your browser settings. Blocking analytics cookies will not affect your ability to use the site.</p>
+        </section>
+
+        <section>
+          <h2>12. Children</h2>
+          <p>Our services are not directed at children under <strong>16</strong>. We do not knowingly collect personal data from anyone under that age. If you believe a child has provided us data, contact us and we will delete it.</p>
+        </section>
+
+        <section>
+          <h2>13. Security</h2>
+          <p>We protect your data with technical and organizational measures appropriate to the risk: encryption in transit (TLS 1.2+) and at rest, scoped access controls, MFA on administrative accounts, audit logging, and regular security reviews. No system is perfectly secure; if a breach occurs that affects you, we will notify you and the relevant authority as required by law.</p>
+        </section>
+
+        <section>
+          <h2>14. Changes to this policy</h2>
+          <p>We may update this policy from time to time. The "Last updated" date at the top reflects the latest revision. For material changes, we will give notice at least 14 days before the change takes effect — by email, in-app banner, or both. Your continued use of our services after the effective date constitutes acceptance.</p>
+        </section>
+
+        <section>
+          <h2>15. Contact</h2>
+          <p>For any question about this policy or about our handling of your personal data:</p>
+          <ul>
+            <li><strong>Email</strong>: <a href="mailto:hello@ventrue.tech">hello@ventrue.tech</a></li>
+            <li><strong>Postal address</strong>: Ventrue Technologies S.A.S., Quito, Ecuador</li>
+            <li><strong>Data controller representative</strong>: Erick Escobar, Founder</li>
+          </ul>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

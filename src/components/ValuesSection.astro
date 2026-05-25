@@ -1,0 +1,56 @@
+---
+export interface ValueItem {
+  /** SVG markup string. If provided, renders inside a gradient circle container. */
+  svgIcon?: string;
+  /** Emoji character. If provided, renders as large text. Takes precedence over svgIcon. */
+  emoji?: string;
+  title: string;
+  description: string;
+  /** hex, e.g. "#0ea5e9" — only used when svgIcon is provided */
+  gradientFrom?: string;
+  /** hex, e.g. "#0284c7" — only used when svgIcon is provided */
+  gradientTo?: string;
+}
+
+export interface Props {
+  title: string;
+  subtitle: string;
+  values: ValueItem[];
+}
+
+const { title, subtitle, values } = Astro.props;
+---
+
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+        {title}
+      </h2>
+      <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {values.map((value) => (
+        <div class="card card-light dark:card-dark text-center p-6">
+          {value.emoji ? (
+            <div class="text-4xl mb-4">{value.emoji}</div>
+          ) : value.svgIcon ? (
+            <div
+              class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center"
+              style={`background: linear-gradient(135deg, ${value.gradientFrom}, ${value.gradientTo})`}
+            >
+              <span class="text-white w-8 h-8" set:html={value.svgIcon} />
+            </div>
+          ) : null}
+          <h3 class="text-xl font-semibold mb-2">{value.title}</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">
+            {value.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

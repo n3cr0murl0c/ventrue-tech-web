@@ -1,0 +1,142 @@
+---
+export interface TerminalLine {
+  text: string;
+  highlight?: boolean;
+}
+
+export interface Props {
+  lang?: string;
+  statusText: string;
+  headingLine1: string;
+  headingAccent: string;
+  headingLine2: string;
+  description: string;
+  ctaHref: string;
+  ctaText: string;
+  secondaryHref: string;
+  secondaryText: string;
+  terminalLines?: TerminalLine[];
+  figLabel?: string;
+}
+
+const {
+  statusText,
+  headingLine1,
+  headingAccent,
+  headingLine2,
+  description,
+  ctaHref,
+  ctaText,
+  secondaryHref,
+  secondaryText,
+  terminalLines = [],
+} = Astro.props;
+---
+
+<section class="relative min-h-screen flex items-center pt-24 pb-16">
+  <div
+    class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+  >
+    <!-- Left column: typography + actions -->
+    <div class="lg:col-span-7 flex flex-col gap-6">
+      <!-- Status pill -->
+      <div
+        class="inline-flex items-center gap-3 border border-ventrue-accent/40 bg-ventrue-accent/10 px-3 py-1.5 rounded-sm w-fit backdrop-blur-md"
+      >
+        <span class="pulse-node"></span>
+        <span
+          class="font-mono text-xs text-ventrue-accent uppercase tracking-tactical font-semibold"
+        >
+          {statusText}
+        </span>
+      </div>
+
+      <h1
+        class="font-tactical text-5xl md:text-7xl font-bold text-white uppercase leading-[1.05]"
+        style="letter-spacing: -0.03em; text-shadow: 0 0 15px rgba(255,255,255,0.15);"
+      >
+        {headingLine1}
+        <br />
+        <span
+          class="text-ventrue-accent"
+          style="text-shadow: 0 0 20px rgba(0,212,255,0.5);"
+        >
+          {headingAccent}
+        </span>
+        <br />
+        {headingLine2}
+      </h1>
+
+      <p
+        class="font-body text-lg text-gray-300 max-w-2xl border-l-2 border-ventrue-accent/70 pl-4 py-2 bg-black/40 backdrop-blur-sm"
+      >
+        {description}
+      </p>
+
+      <div class="flex flex-wrap gap-4 mt-2">
+        <a
+          href={ctaHref}
+          class="btn-tactical rounded-sm"
+        >
+          {ctaText}
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            ></path>
+          </svg>
+        </a>
+        <a
+          href={secondaryHref}
+          class="btn-tactical-outline rounded-sm"
+        >
+          {secondaryText}
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </a>
+      </div>
+
+      {terminalLines.length > 0 && (
+        <div
+          class="mt-6 glass-panel p-4 rounded-sm font-mono text-xs text-ventrue-accent/90 max-h-36 overflow-hidden relative"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 pointer-events-none z-10"
+          />
+          <div
+            class="relative z-0 flex flex-col gap-1 leading-relaxed tracking-tactical"
+          >
+            {terminalLines.map((line) => (
+              <div class:list={[line.highlight && "text-white mt-2"]}>
+                &gt; {line.text}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <!-- Right column: slot for custom visual content -->
+    <div class="lg:col-span-5 relative flex justify-center lg:justify-end">
+      <slot name="right-panel" />
+    </div>
+  </div>
+</section>

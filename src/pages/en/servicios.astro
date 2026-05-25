@@ -1,0 +1,270 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+
+// Service order leads with our differentiated practice areas (cloud, devops, AI),
+// then build-it categories (mobile, APIs, web), then advisory.
+// Prices are intentionally not surfaced publicly — every engagement is scoped and quoted to fit.
+const services = [
+  {
+    id: 'cloud',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>`,
+    title: 'Cloud Architecture',
+    description: 'Multi-region, cloud-native design and migration on AWS or Azure. We think about cost, observability, and disaster recovery first — not the trendy service.',
+    features: [
+      'Cloud-native architecture design',
+      'Multi-region and multi-AZ strategy',
+      'Migration from on-prem or legacy',
+      'Cost optimization (FinOps)',
+      'Disaster recovery design',
+      'Architecture decision records (ADRs)'
+    ],
+    timeline: '2-6 weeks',
+    popular: false
+  },
+  {
+    id: 'devops',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>`,
+    title: 'DevOps & SRE',
+    description: 'CI/CD, infrastructure as code, observability, and on-call playbooks. We take your deploy pipeline and your production seriously — project or monthly retainer.',
+    features: [
+      'CI/CD pipelines (GitHub Actions, GitLab)',
+      'IaC with Terraform / OpenTofu',
+      'Observability (logs, metrics, traces)',
+      'SLOs and actionable alerts',
+      'On-call playbooks and postmortems',
+      'Security hardening'
+    ],
+    timeline: '2-8 weeks',
+    popular: false
+  },
+  {
+    id: 'ai-automation',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+    title: 'AI & Automation',
+    description: 'LLM integrations, agentic workflows, internal-tool automation, and content pipelines. We build and operate — not just demo prototypes.',
+    features: [
+      'LLM integration (Claude, GPT, Llama)',
+      'Agents with tool use and memory',
+      'Internal process automation',
+      'Content and posting pipelines',
+      'Evaluation and guardrails',
+      'Token-cost monitoring'
+    ],
+    timeline: '3-12 weeks',
+    popular: true
+  },
+  {
+    id: 'mobile',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
+    title: 'Mobile Applications',
+    description: 'iOS and Android applications with Flutter or React Native + backend. Delivered in 8-16 weeks, store publishing included.',
+    features: [
+      'iOS and Android from one codebase',
+      'Native-feeling UI/UX',
+      'Scalable backend included',
+      'App Store and Play Store publishing',
+      'Push notifications',
+      'Integrated analytics'
+    ],
+    timeline: '8-16 weeks',
+    popular: false
+  },
+  {
+    id: 'api',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>`,
+    title: 'APIs & Backend',
+    description: 'Scalable RESTful and event-driven backends. Documented APIs, solid auth, and observability from day one.',
+    features: [
+      'RESTful and event-driven APIs',
+      'OpenAPI / Swagger generation',
+      'OAuth / JWT auth',
+      'Optimized database',
+      'Cache and CDN',
+      'Load testing'
+    ],
+    timeline: '4-10 weeks',
+    popular: false
+  },
+  {
+    id: 'web',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>`,
+    title: 'Corporate Websites',
+    description: 'Conversion-optimized sites with SEO, analytics, and CMS. Fast loading, accessible, with an admin panel.',
+    features: [
+      'Modern UX/UI design',
+      'Technical and on-page SEO',
+      'Responsive (mobile-first)',
+      'Core Web Vitals optimized',
+      'CMS / admin panel',
+      'Analytics integration'
+    ],
+    timeline: '2-6 weeks',
+    popular: false
+  },
+  {
+    id: 'consulting',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`,
+    title: 'Fractional CTO / Advisory',
+    description: 'Fractional technical leadership, architecture audits, technical hiring, and scaling roadmaps. For founders who need direction without a full-time hire yet.',
+    features: [
+      'Full technical audit',
+      'Architecture roadmap',
+      'Stack and vendor selection',
+      'Technical hiring and interviews',
+      'Strategic code review',
+      'Internal team coaching'
+    ],
+    timeline: '2-8 weeks',
+    popular: false
+  }
+];
+---
+
+<Layout
+  title="Services | Ventrue Tech — Software, cloud, and automation"
+  description="Cloud architecture, DevOps, AI, mobile apps, APIs, and fractional CTO. A single engineering practice that designs, builds, and operates."
+  lang="en"
+>
+  <Navbar />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+      <div class="absolute inset-0 bg-gradient-to-br from-ventrue-dark via-primary-900/20 to-ventrue-darker"></div>
+
+      <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(rgba(0,212,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-ventrue-accent/20 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-ventrue-secondary/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ventrue-accent/10 border border-ventrue-accent/30 mb-8">
+          <span class="w-2 h-2 rounded-full bg-ventrue-accent animate-pulse"></span>
+          <span class="text-sm font-medium text-ventrue-accent">Design · Build · Operate</span>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
+          <span class="gradient-text">Software, cloud, and automation</span>
+          <br />
+          <span class="text-white">as a single service.</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 text-balance">
+          An engineering practice that covers the full cycle: cloud architecture, DevOps, AI, and product builds.
+          Your on-demand engineering team — without having to assemble three separate vendors.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <a href="/en/contact" class="btn-primary inline-flex items-center gap-2 px-8 py-4 text-lg">
+            Let's talk
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="#services" class="btn-secondary inline-flex items-center gap-2 px-8 py-4 text-lg">
+            See Services
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-ventrue-darker">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="text-ventrue-accent font-medium">OUR SERVICES</span>
+          <h2 class="text-3xl md:text-5xl font-display font-bold mt-2 mb-4">
+            One practice, <span class="gradient-text">seven disciplines</span>
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            From architecture to on-call. Pick a single discipline or hire us as your full engineering team.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          {services.map((service) => (
+            <div class={`card card-dark p-8 relative overflow-hidden group ${service.popular ? 'border-ventrue-accent/50' : ''}`}>
+              {service.popular && (
+                <div class="absolute top-4 right-4 px-3 py-1 bg-ventrue-accent text-ventrue-dark text-xs font-bold rounded-full">
+                  Most Requested
+                </div>
+              )}
+
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-ventrue-accent flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div class="text-white" set:html={service.icon} />
+              </div>
+
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-bold">{service.title}</h3>
+              </div>
+
+              <p class="text-gray-400 mb-6">{service.description}</p>
+
+              <ul class="space-y-3 mb-6">
+                {service.features.map((feature) => (
+                  <li class="flex items-center gap-3 text-sm text-gray-300">
+                    <svg class="w-5 h-5 text-ventrue-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="flex items-center justify-between pt-6 border-t border-white/10">
+                <div>
+                  <div class="text-sm font-medium text-ventrue-accent uppercase tracking-wide">Custom quote</div>
+                  <div class="text-sm text-gray-500 mt-1">Timeline: {service.timeline}</div>
+                </div>
+                <a href="/en/contact" class="btn-primary px-6 py-2">
+                  Let's talk
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 bg-gradient-to-r from-primary-600 via-ventrue-secondary to-ventrue-accent relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+          Ready to ship something serious?
+        </h2>
+        <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+          Tell us about your project and we'll send a custom quote within 24 hours.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/en/contact"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-white text-ventrue-dark font-bold rounded-xl hover:bg-gray-100 transition-colors"
+          >
+            Start a Conversation
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a
+            href="/en/projects"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/20 transition-colors"
+          >
+            See Projects
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

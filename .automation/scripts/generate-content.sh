@@ -1,345 +1,98 @@
 #!/bin/bash
-# Ventrue Tech - Comprehensive Content Generator
-# Genera artículos de calidad con estructura completa
-
-cd /home/n3cr0murl0c/Documents/GitHub/ventrue-tech-web
-
-TODAY=$(date +%Y-%m-%d)
-TIMESTAMP=$(date +%Y%m%d%H%M%S)
-SLUG="post-${TIMESTAMP}"
-
-# Contenido DevOps
-generate_devops() {
-cat << EOF
-## DevOps: La Cultura que Transforma
-
-DevOps no es solo herramientas, es una cultura que combina desarrollo de software con operaciones de TI para entregar valor más rápido.
-
-## Beneficios Clave
-
-- **Despliegues más frecuentes:** De semanas a horas
-- **Mayor calidad:** Testing automatizado en cada paso
-- **Colaboración efectiva:** Devs y Ops trabajan juntos
-- **Recuperación rápida:** Mean Time To Recovery reducido
-
-## Herramientas Esenciales
-
-| Categoría | Herramientas |
-|-----------|--------------|
-| **CI/CD** | GitHub Actions, Azure DevOps, GitLab CI |
-| **Containers** | Docker, Kubernetes, Helm |
-| **Monitoring** | Prometheus, Grafana, Datadog |
-| **IaC** | Terraform, Pulumi, Bicep |
-
-## Mejores Prácticas
-
-1. **Infrastructure as Code:** Todo versionado en Git
-2. **Pipeline como código:** Reproducible y auditable
-3. **Feature flags:** Deploy sin activar
-4. **Observabilidad completa:** Logs, métricas y traces
-EOF
-}
-
-# Contenido .NET
-generate_dotnet() {
-cat << EOF
-## .NET 2026: Multiplataforma y Moderno
-
-.NET ha evolucionado significativamente. Ahora es un framework verdaderamente multiplataforma que corre en Windows, Linux, macOS, Docker y Kubernetes.
-
-## Características Principales
-
-- **Rendimiento excepcional:** Competitivo con C++ en muchos benchmarks
-- **ASP.NET Core:** El framework web más rápido según TechEmpower
-- **Unified SDK:** Mismo código para web, desktop, mobile y cloud
-- **AI integrado:** Azure AI Services nativos en el SDK
-
-## Ejemplo Práctico
-
-\`\`\`csharp
-// Minimal API en .NET 8
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-app.MapGet("/api/hello", () => Results.Ok(new { 
-    message = "Hello from .NET 8!", 
-    timestamp = DateTime.UtcNow 
-}));
-
-app.Run();
-\`\`\`
-
-## Por Qué Elegir .NET
-
-1. **Microsoft support:** Enterprise-grade support
-2. **Ecosistema rico:** Miles de paquetes NuGet
-3. **Visual Studio:** IDE de clase mundial
-4. **C#:** Uno de los lenguajes más populares del mundo
-EOF
-}
-
-# Contenido Flutter
-generate_flutter() {
-cat << EOF
-## Flutter: UI Nativa desde una Sola Base
-
-Flutter permite crear aplicaciones nativas compiladas para iOS, Android, web y desktop, todo desde una única base de código en Dart.
-
-## Ventajas Competitivas
-
-- **Hot Reload:** Ve cambios instantáneamente sin perder estado
-- **Custom painters:** UI ilimitada, no hay límites de componentes
-- **Rendimiento nativo:** Compila a código nativo ARM
-- **Single codebase:** 1 equipo, 4 plataformas
-
-## Widget Fundamental
-
-\`\`\`dart
-class MiPrimerWidget extends StatelessWidget {
-  final String titulo;
-  
-  const MiPrimerWidget({super.key, required this.titulo});
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(titulo)),
-      body: Center(
-        child: Text('Hola Flutter'),
-      ),
-    );
-  }
-}
-\`\`\`
-
-## Estado del Ecosistema
-
-Flutter está en más de 1 millón de apps en producción. Grandes empresas como BMW, Google Pay y Alibaba lo utilizan para producción.
-EOF
-}
-
-# Contenido Cloud
-generate_cloud() {
-cat << EOF
-## Cloud Computing en 2026: Más Allá de Servidores
-
-La nube ha dejado de ser "servidores remotos" para convertirse en plataforma de innovación. Serverless, AI y edge computing dominan el panorama.
-
-## Proveedores Principales
-
-| Proveedor | Fortalezas Principales |
-|-----------|------------------------|
-| **Azure** | Integración Microsoft, Azure AI, Enterprise |
-| **AWS** | Variedad de servicios, marketplace, comunidad |
-| **GCP** | Kubernetes nativo, Data/AI, precios transparentes |
-
-## Arquitecturas Modernas
-
-### Serverless First
-No gestionas servidores. Pagas por ejecución real.
-
-### Event-Driven
-Servicios que reaccionan a eventos, no a requests.
-
-### Multi-cloud Strategy
-Evita vendor lock-in con abstracciones adecuadas.
-
-## Cost Optimization Tips
-
-1. **Reserved Instances:** Ahorra hasta 72% para cargas predecibles
-2. **Spot Instances:** Hasta 90% descuento para workloads flexibles
-3. **Auto-scaling:** Solo paga lo que necesitas
-4. **Right-sizing:** Elimina recursos sobreaprovisionados
-EOF
-}
-
-# Contenido AI
-generate_ai() {
-cat << EOF
-## AI para Developers: Tu Nuevo Compañero de Código
-
-La inteligencia artificial ha transformado el desarrollo de software. No reemplaza developers, pero los developers que usan AI reemplazan a los que no.
-
-## Herramientas Esenciales
-
-- **GitHub Copilot:** Code completion inteligente
-- **Claude Code:** AI Agent para tareas de desarrollo
-- **ChatGPT/Claude:** Documentación, debugging, arquitectura
-- **Tabnine:** Completado de código on-premise
-
-## Casos de Uso Prácticos
-
-1. **Boilerplate:** Genera estructuras repetitivas
-2. **Testing:** Crea unit tests desde código existente
-3. **Documentación:** Genera docs desde código
-4. **Refactoring:** Mejora código legacy con un prompt
-5. **Debugging:** Identifica bugs y sugiere fixes
-
-## Prompt Engineering para Developers
-
-Eres un senior software engineer. Revisa este código y:
-1. Identifica code smells
-2. Sugiere mejoras de rendimiento
-3. Propón refactoring si es necesario
-
-## El Futuro
-
-AI no reemplaza pensamiento crítico. Los mejores developers serán quienes:
-- Saben qué preguntar
-- Validan outputs de AI
-- Entienden el "por qué" detrás del código
-EOF
-}
-
-# Quick Tip
-generate_tips() {
-cat << EOF
-## Tip de la Semana
-
-> El mejor código es el que no tienes que escribir.
-
-## Recuerda
-
-- **Comenta el por qué, no el qué**
-- **Escribe tests antes de funcionalidad**
-- **Revisa antes de hacer commit**
-- **Automatiza lo repetitivo**
-
-## Frase del Día
-
-> Programs must be written for people to read, and only incidentally for machines to execute. — Harold Abelson
-EOF
-}
-
-# Weekly Roundup
-generate_weekly() {
-cat << EOF
-## Esta Semana en Tech
-
-### Noticias Destacadas
-
-- **Nuevas versiones de frameworks:** Actualizaciones importantes en el ecosistema
-- **Tendencias en desarrollo:** Serverless, AI, edge computing siguen creciendo
-- **Herramientas emergentes:** Nuevas herramientas que simplifican workflows
-
-### Releases Importantes
-
-1. .NET 9 preview disponible
-2. Flutter 3.24 con mejoras de rendimiento
-3. Kubernetes 1.31 con nuevas features de security
-
-### Recursos Útiles
-
-- [Documentación MDN](https://developer.mozilla.org)
-- [GitHub Trending](https://github.com/trending)
-- [Awesome Lists](https://github.com/sindresorhus/awesome)
-EOF
-}
-
-# Generar conclusión
-generate_conclusion() {
-cat << EOF
-
----
-
-## Conclusión
-
-¡Sigue aprendiendo y mejorando como developer! La industria evoluciona constantemente, y mantenerse actualizado es clave.
-
----
-
-**¿Te gustó este artículo?** Compártelo en redes sociales.
-EOF
-}
-
-# Generar tags dinámicamente
-generate_tags() {
-    local key="$1"
-    echo "#$(echo $key | sed 's/.*/\u&/') #VentrueTech #DesarrolloSoftware #TechEducation"
-}
-
-# Seleccionar tema basado en día
-DAY_OF_WEEK=$(date +%u)
-case $DAY_OF_WEEK in
-  1) 
-    KEY="devops"
-    TITLE="DevOps Monday"
-    CONTENT=$(generate_devops)
-    ;;
-  2) 
-    KEY="dotnet"
-    TITLE=".NET Tuesday"
-    CONTENT=$(generate_dotnet)
-    ;;
-  3) 
-    KEY="flutter"
-    TITLE="Flutter Wednesday"
-    CONTENT=$(generate_flutter)
-    ;;
-  4) 
-    KEY="cloud"
-    TITLE="Cloud Thursday"
-    CONTENT=$(generate_cloud)
-    ;;
-  5) 
-    KEY="ai"
-    TITLE="AI Friday"
-    CONTENT=$(generate_ai)
-    ;;
-  6) 
-    KEY="tips"
-    TITLE="Quick Tip"
-    CONTENT=$(generate_tips)
-    ;;
-  7) 
-    KEY="weekly"
-    TITLE="Weekly Roundup"
-    CONTENT=$(generate_weekly)
-    ;;
-esac
-
-TAGS=$(generate_tags $KEY)
-READTIME=$((3 + RANDOM % 7))
-
-# Generar artículo completo
-ARTICLE="---
-title: \"${TITLE} - ${TODAY}\"
-description: \"Contenido generado automáticamente sobre ${KEY} para developers latinoamericanos.\"
-pubDate: ${TODAY}
-author: \"Ventrue Tech Team\"
-tags: [\"${KEY}\", \"tutorial\", \"2026\"]
-lang: \"es\"
-featured: false
-readTime: ${READTIME}
----
-
-# ${TITLE} - ${TODAY}
-
-${CONTENT}
-$(generate_conclusion)
-
-${TAGS}
-"
-
-# Escribir archivo
-echo "$ARTICLE" > src/content/blog/${SLUG}.md
-
-echo "============================================"
-echo "✅ Artículo generado exitosamente"
-echo "============================================"
-echo "📄 Archivo: src/content/blog/${SLUG}.md"
-echo "🏷️ Tema: ${KEY}"
-echo "📅 Fecha: ${TODAY}"
-echo "🔗 Slug: ${SLUG}"
-echo "⏱️ Tiempo lectura: ${READTIME} min"
-echo "============================================"
-
-# Auto-commit y push
-echo ""
-echo "🔄 Haciendo commit y push..."
-git add src/content/blog/${SLUG}.md
-git commit -m "📝 Auto-generate: ${TITLE} - ${TODAY}"
-git push origin main 2>/dev/null
-
-echo ""
-echo "🎉 Proceso completado!"
+# Ventrue Tech — Content Generator (cron entry-point)
+#
+# Calls the dockerized content pipeline (CustomAi/content_gen/) which runs a
+# plan -> write -> critique -> revise loop against a local Gemma model
+# served by llama.cpp, with RAG over books in content_gen/books/.
+#
+# The pipeline itself lives in a separate repo (CustomAi) so it can be reused
+# across projects. This shim writes its output (markdown blog posts) into
+# THIS repo's src/content/blog/ via a bind mount.
+#
+# Prerequisites (one-time):
+#   - Docker 24+ and docker-compose v2 installed
+#   - GGUF model file in $CONTENT_GEN_DIR/models/
+#   - $CONTENT_GEN_DIR/.env configured (cp .env.example .env)
+#   - `docker compose -f $CONTENT_GEN_DIR/docker-compose.yml up -d llm`
+#   - Override the pipeline location with: export CONTENT_GEN_DIR=/path/to/content_gen
+#
+# Usage:
+#   bash .automation/scripts/generate-content.sh                # day-of-week topic, Spanish
+#   bash .automation/scripts/generate-content.sh ai en          # specific topic + language
+
+set -euo pipefail
+
+# Repo root regardless of where the cron invokes this from.
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
+# Location of the dockerized content pipeline. Override via env var if it lives elsewhere.
+CONTENT_GEN_DIR="${CONTENT_GEN_DIR:-$HOME/GithubRepos/CustomAi/content_gen}"
+
+if [[ ! -d "$CONTENT_GEN_DIR" ]]; then
+    echo "✗ CONTENT_GEN_DIR not found: $CONTENT_GEN_DIR" >&2
+    echo "  Set CONTENT_GEN_DIR to the path of the content_gen directory and re-run." >&2
+    exit 1
+fi
+
+cd "$REPO_ROOT"
+
+TOPIC="${1:-}"
+LANG="${2:-es}"
+
+GENERATOR_ARGS=("--lang" "$LANG")
+if [[ -n "$TOPIC" ]]; then
+    GENERATOR_ARGS+=("--topic" "$TOPIC")
+fi
+
+# Confirm the LLM service is up. If not, start it and wait for the healthcheck.
+if ! docker compose -f "$CONTENT_GEN_DIR/docker-compose.yml" ps llm --status running --quiet | grep -q .; then
+    echo "▶ LLM service not running — starting it..."
+    docker compose -f "$CONTENT_GEN_DIR/docker-compose.yml" up -d llm
+    # Wait up to ~3 minutes for the healthcheck (model load can take a while).
+    for _ in $(seq 1 36); do
+        STATUS=$(docker inspect -f '{{.State.Health.Status}}' ventrue-llm 2>/dev/null || echo "missing")
+        if [[ "$STATUS" == "healthy" ]]; then
+            break
+        fi
+        sleep 5
+    done
+    if [[ "$STATUS" != "healthy" ]]; then
+        echo "✗ LLM service failed to become healthy. Check: docker compose logs llm" >&2
+        exit 1
+    fi
+fi
+
+echo "▶ Generating post (topic=${TOPIC:-auto}, lang=$LANG)..."
+
+# Capture the list of blog posts before, so we can find what was added.
+BLOG_DIR="$REPO_ROOT/src/content/blog"
+BEFORE=$(ls "$BLOG_DIR" 2>/dev/null | sort || true)
+
+# Note: --no-commit because we do git ops on the host (the container doesn't have credentials).
+docker compose -f "$CONTENT_GEN_DIR/docker-compose.yml" run --rm generator \
+    "${GENERATOR_ARGS[@]}" --no-commit
+
+AFTER=$(ls "$BLOG_DIR" 2>/dev/null | sort || true)
+NEW_FILES=$(comm -13 <(echo "$BEFORE") <(echo "$AFTER") || true)
+
+if [[ -z "$NEW_FILES" ]]; then
+    echo "✗ No new post was produced. Check the generator output above." >&2
+    exit 1
+fi
+
+echo "▶ New post(s):"
+echo "$NEW_FILES" | sed 's/^/  - /'
+
+# Commit + push (host-side, so we use the developer's git config / SSH keys).
+echo "$NEW_FILES" | while read -r file; do
+    [[ -z "$file" ]] && continue
+    git add "$BLOG_DIR/$file"
+done
+
+if ! git diff --staged --quiet; then
+    FIRST_FILE=$(echo "$NEW_FILES" | head -n1)
+    git commit -m "📝 Auto-generate: ${FIRST_FILE%.md}"
+    git push origin main 2>/dev/null || echo "(push skipped — no remote or no creds)"
+fi
+
+echo "✓ Done."

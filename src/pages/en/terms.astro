@@ -1,0 +1,169 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+
+const lastUpdated = '2026-05-24';
+const effectiveDate = '2026-05-24';
+---
+
+<Layout
+  title="Terms of Service | Ventrue Tech"
+  description="The terms under which Ventrue Technologies provides its website, the Ventrue Social SaaS, and its engineering services."
+  lang="en"
+>
+  <Navbar />
+
+  <main class="pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <p class="text-ventrue-accent text-sm font-medium tracking-wide uppercase mb-3">Legal</p>
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">Terms of Service</h1>
+        <p class="text-gray-400">
+          Effective: <time datetime={effectiveDate}>{effectiveDate}</time> ·
+          Last updated: <time datetime={lastUpdated}>{lastUpdated}</time> · Version 1.0
+        </p>
+        <p class="text-gray-500 text-sm mt-3">
+          A Spanish version is available at <a href="/es/terminos" class="text-ventrue-accent hover:underline">/es/terminos</a>.
+        </p>
+      </header>
+
+      <article class="prose prose-invert prose-lg max-w-none">
+        <section>
+          <h2>1. Agreement</h2>
+          <p>
+            These Terms of Service ("Terms") govern your use of the website at <a href="https://ventrue.tech">ventrue.tech</a>, the <em>Ventrue Social</em> SaaS platform, and any other product or service offered by <strong>Ventrue Technologies S.A.S.</strong> ("Ventrue Tech", "we"). By accessing or using any of our services, you agree to be bound by these Terms and by our <a href="/en/privacy">Privacy Policy</a>. If you do not agree, do not use the services.
+          </p>
+        </section>
+
+        <section>
+          <h2>2. Description of services</h2>
+          <p>We offer:</p>
+          <ul>
+            <li>A <strong>marketing website</strong> at ventrue.tech with information about our practice, blog content, and a contact form.</li>
+            <li><strong>Ventrue Social</strong> — a SaaS that lets you connect your TikTok, Instagram, LinkedIn, and similar accounts so we can schedule and publish content on your behalf, optionally generating drafts with AI.</li>
+            <li><strong>Engineering services</strong> — software development, cloud architecture, DevOps, AI/automation engineering, and fractional CTO advisory, delivered under individual statements of work.</li>
+          </ul>
+          <p>We may change, add, or discontinue features at any time. We will give reasonable notice for material changes that affect paid services you are actively using.</p>
+        </section>
+
+        <section>
+          <h2>3. Eligibility and account registration</h2>
+          <p>You must be at least 18 years old (or the age of majority in your jurisdiction, whichever is greater) and able to enter into a binding contract. By creating an account you confirm this and agree to:</p>
+          <ul>
+            <li>Provide accurate, current, and complete information;</li>
+            <li>Keep your credentials confidential and not share them;</li>
+            <li>Be responsible for all activity that occurs under your account;</li>
+            <li>Notify us immediately of any unauthorized access or security incident.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>4. Authentication and connected platforms</h2>
+          <p>When you connect a social platform (TikTok, Instagram, LinkedIn, etc.) to Ventrue Social, you authorize us — through that platform's OAuth flow and within the scopes you explicitly grant — to:</p>
+          <ul>
+            <li>Read your account's public profile data;</li>
+            <li>Publish content (text, images, video) to your account at the times and with the captions you specify;</li>
+            <li>Read posting results and basic analytics for content we publish on your behalf.</li>
+          </ul>
+          <p>You can revoke this authorization at any time through Ventrue Social's settings or directly through the platform. Revoking authorization stops any future activity but does not delete content already posted to your platform — that is governed by the platform itself.</p>
+          <p>Your use of each connected platform also remains subject to that platform's terms of service (e.g. <a href="https://www.tiktok.com/legal/terms-of-service" target="_blank" rel="noopener noreferrer">TikTok Terms of Service</a>). You are responsible for complying with them. If a platform suspends or restricts your account, we cannot override that decision.</p>
+        </section>
+
+        <section>
+          <h2>5. Acceptable use</h2>
+          <p>You agree not to use our services to:</p>
+          <ul>
+            <li>Post content that is illegal, fraudulent, defamatory, harassing, hateful, or that infringes intellectual property or privacy rights;</li>
+            <li>Distribute spam, misleading information, or unsolicited bulk content;</li>
+            <li>Impersonate any person or organization;</li>
+            <li>Violate the terms of any connected platform (including its rate limits, content rules, automation policies, or platform-specific bans);</li>
+            <li>Attempt to reverse-engineer, decompile, scrape beyond rate limits, or interfere with the security or integrity of our systems;</li>
+            <li>Use the service to build a competing product against Ventrue Tech.</li>
+          </ul>
+          <p>We may suspend or terminate accounts that violate this section without prior notice, and we will report unlawful activity to competent authorities.</p>
+        </section>
+
+        <section>
+          <h2>6. Your content</h2>
+          <p>You retain all rights to the content you upload, schedule, or generate through our services ("Your Content"). You grant Ventrue Tech a limited, non-exclusive, royalty-free license to host, store, transmit, display, and publish Your Content solely to perform the services you have requested. This license ends when you delete the content or your account, except for backup copies that we retain for the periods described in our <a href="/en/privacy#retention">Privacy Policy</a>.</p>
+          <p>You represent that you have all rights necessary to use Your Content as you direct us to use it, including any third-party material it contains.</p>
+        </section>
+
+        <section>
+          <h2>7. Fees and subscriptions</h2>
+          <p>Ventrue Social may offer free and paid tiers. Pricing, billing periods, and feature limits for paid tiers are described in-app at the moment of purchase and may change with 30 days' notice for existing subscriptions. Unless otherwise stated:</p>
+          <ul>
+            <li>Subscriptions auto-renew until cancelled;</li>
+            <li>Fees are non-refundable except where required by law;</li>
+            <li>If your payment fails, we may suspend the service until payment is current.</li>
+          </ul>
+          <p>Engineering-services engagements are billed per the statement of work signed with you.</p>
+        </section>
+
+        <section>
+          <h2>8. Intellectual property</h2>
+          <p>The Ventrue Tech name, logo, website, software, documentation, designs, and source code are owned by Ventrue Technologies S.A.S. and are protected by intellectual property laws. We grant you a limited, revocable, non-exclusive license to use the services for their intended purpose. No other rights are granted by implication.</p>
+          <p>If you give us feedback or suggestions, you grant us a perpetual, royalty-free license to use them without obligation to you.</p>
+        </section>
+
+        <section>
+          <h2>9. AI-generated content</h2>
+          <p>Where you use AI features in Ventrue Social, the generated drafts may be incorrect, biased, or not suitable for your purpose. You are responsible for reviewing AI output before publishing it. We do not guarantee that AI output is original, factually correct, or non-infringing. You retain ownership of the prompts you submit and the outputs returned, subject to the third-party AI provider's terms.</p>
+        </section>
+
+        <section>
+          <h2>10. Disclaimers</h2>
+          <p>The services are provided "as is" and "as available", without warranties of any kind, express or implied — including merchantability, fitness for a particular purpose, non-infringement, accuracy, or uninterrupted availability. We do not guarantee that posts will be delivered to connected platforms on time, that platforms will accept the content, or that any particular metric (views, engagement, reach) will be achieved.</p>
+        </section>
+
+        <section>
+          <h2>11. Limitation of liability</h2>
+          <p>To the maximum extent permitted by law, Ventrue Tech and its founders, employees, and contractors are <strong>not liable</strong> for any indirect, incidental, special, consequential, or punitive damages — including lost profits, lost data, lost goodwill, business interruption, or platform account suspension — arising out of or in connection with the services.</p>
+          <p>Our total liability for any claim arising out of or in connection with the services is limited to the greater of (a) the amount you paid us for the service in the 12 months before the claim, or (b) USD 100.</p>
+          <p>Some jurisdictions do not allow these limitations; in those jurisdictions our liability is limited to the maximum extent permitted by applicable law.</p>
+        </section>
+
+        <section>
+          <h2>12. Indemnification</h2>
+          <p>You agree to indemnify and hold Ventrue Tech harmless from any claim, loss, or expense (including reasonable legal fees) arising from (a) your breach of these Terms, (b) Your Content, (c) your violation of any law or third-party right, or (d) your use of any connected platform in breach of that platform's terms.</p>
+        </section>
+
+        <section>
+          <h2>13. Termination</h2>
+          <p>You can stop using our services at any time and delete your account from in-app settings or by emailing <a href="mailto:hello@ventrue.tech">hello@ventrue.tech</a>. We can suspend or terminate your access if you violate these Terms, if we are required to by law, or if continuing to provide the service is no longer commercially viable, with reasonable notice where feasible.</p>
+          <p>Sections that by their nature should survive termination (intellectual property, disclaimers, limitation of liability, indemnification, governing law) survive termination.</p>
+        </section>
+
+        <section>
+          <h2>14. Governing law and disputes</h2>
+          <p>These Terms are governed by the laws of the <strong>Republic of Ecuador</strong>, without regard to conflict-of-laws principles. Any dispute arising out of or in connection with these Terms will be submitted to the competent courts of Quito, Ecuador — except that either party may seek injunctive relief in any court of competent jurisdiction to protect its intellectual property or confidential information.</p>
+        </section>
+
+        <section>
+          <h2>15. Changes to these Terms</h2>
+          <p>We may update these Terms from time to time. The "Last updated" date at the top reflects the latest revision. For material changes affecting your rights, we will give notice at least 14 days before the change takes effect. Your continued use of the services after the effective date constitutes acceptance.</p>
+        </section>
+
+        <section>
+          <h2>16. Miscellaneous</h2>
+          <p><strong>Entire agreement</strong>: these Terms, together with the Privacy Policy and any statement of work you have signed with us, are the entire agreement between you and Ventrue Tech regarding the services and supersede any prior agreement on the same subject.</p>
+          <p><strong>Severability</strong>: if any provision is held unenforceable, the rest of the Terms remains in effect.</p>
+          <p><strong>Waiver</strong>: our failure to enforce any right is not a waiver of that right.</p>
+          <p><strong>Assignment</strong>: you may not assign your rights under these Terms without our consent. We may assign in connection with a merger, acquisition, or sale of assets.</p>
+        </section>
+
+        <section>
+          <h2>17. Contact</h2>
+          <p>For any question about these Terms:</p>
+          <ul>
+            <li><strong>Email</strong>: <a href="mailto:hello@ventrue.tech">hello@ventrue.tech</a></li>
+            <li><strong>Postal address</strong>: Ventrue Technologies S.A.S., Quito, Ecuador</li>
+          </ul>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

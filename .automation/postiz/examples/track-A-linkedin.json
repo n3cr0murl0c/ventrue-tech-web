@@ -1,0 +1,20 @@
+{
+  "type": "schedule",
+  "date": "2026-05-25T14:00:00.000Z",
+  "shortLink": false,
+  "tags": ["devops", "azure"],
+  "posts": [
+    {
+      "integration": { "id": "REPLACE_WITH_POSTIZ_CHANNEL_LINKEDIN_VENTRUE" },
+      "value": [
+        {
+          "content": "Acabo de armar un pipeline de Azure DevOps que normalmente toma una tarde montar — en 12 minutos.\n\nEl truco no es Bicep ni los YAML templates. Es separar `azure-pipelines.yml` en stages independientes desde el día 1, aunque al inicio se sienta sobrediseñado. Cuando llegue el primer hotfix de viernes, esa decisión te ahorra una hora.\n\nMañana subo el repo con el setup completo + el comando `az` que reemplaza los 3 clicks del portal. ¿Qué pipeline les dio más trabajo montar este año?",
+          "image": []
+        }
+      ],
+      "settings": {
+        "__type": "linkedin"
+      }
+    }
+  ]
+}

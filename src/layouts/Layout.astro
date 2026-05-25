@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import SciFiBackground from '../components/SciFiBackground.astro';
 import { languages } from '../i18n/ui';
 
 interface Props {
@@ -15,11 +16,13 @@ interface Props {
   author?: string;
   section?: string;
   tags?: string[];
+  /** Render the schematic starfield + grid + scan + CRT background. Default true. */
+  bgEffect?: boolean;
 }
 
-const { 
-  title, 
-  description = 'Ventrue Tech - Soluciones Digitales Innovadoras. Transformamos ideas en soluciones digitales que impulsan el crecimiento de tu negocio.',
+const {
+  title,
+  description = 'Ventrue Tech — Software, cloud y automatización como servicio.',
   image = '/favicon.svg',
   lang = 'es',
   type = 'website',
@@ -28,6 +31,7 @@ const {
   author,
   section,
   tags,
+  bgEffect = true,
 } = Astro.props;
 
 const url = `https://ventrue.tech${Astro.url.pathname}`;
@@ -56,7 +60,10 @@ const url = `https://ventrue.tech${Astro.url.pathname}`;
     </script>
   </head>
   <body class="min-h-screen">
-    <slot />
+    {bgEffect && <SciFiBackground />}
+    <div class="relative z-10">
+      <slot />
+    </div>
     <CookieConsent lang={lang} />
   </body>
 </html>

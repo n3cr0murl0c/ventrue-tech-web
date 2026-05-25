@@ -1,366 +1,254 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/Navbar.astro';
-import Footer from '@/components/Footer.astro';
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
+import HeroSection from "@/components/HeroSection.astro";
+import HeroSpotlight from "@/components/HeroSpotlight.astro";
+import TrustStats from "@/components/TrustStats.astro";
+import ServicesPreview from "@/components/ServicesPreview.astro";
+import MissionVision from "@/components/MissionVision.astro";
+import ValuesSection from "@/components/ValuesSection.astro";
+import FeaturedProjects from "@/components/FeaturedProjects.astro";
+import LatestArticles from "@/components/LatestArticles.astro";
+import CTASection from "@/components/CTASection.astro";
+
+// ── SVG icon fragments ────────────────────────────────────
+const CLOUD_SVG =
+  '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>';
+const CODE_SVG =
+  '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>';
+const BOLT_SVG =
+  '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>';
+const MOBILE_SVG =
+  '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>';
+const EYE_SVG =
+  '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>';
+const SHIELD_SVG =
+  '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>';
+const CHECK_SVG =
+  '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
+const BULB_SVG =
+  '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>';
+
+// ── Hero spotlight items (auto-rotating featured projects + blog posts) ──
+const SPOTLIGHT_ITEMS = [
+  {
+    kind: "PROYECTO",
+    title: "FinHelper",
+    description:
+      "Calculadora financiera en Flutter con monetización AdMob y backend .NET.",
+    href: "/es/projects/finhelper",
+    meta: "Flutter · .NET · AdMob",
+    ctaText: "Ver proyecto ›",
+    badge: "F",
+  },
+  {
+    kind: "ARTÍCULO",
+    title: "Cómo Mejorar Tu Código en 2026",
+    description:
+      "Mejores prácticas, herramientas y técnicas para elevar tu nivel como desarrollador.",
+    href: "/es/blog/mejorar-codigo-2026",
+    meta: "8 min · 7 Feb 2026",
+    ctaText: "Leer artículo ›",
+    badge: "C",
+  },
+  {
+    kind: "SERVICIO",
+    title: "IA & Automatización",
+    description:
+      "LLMs, workflows agénticos y pipelines de contenido. Construimos y operamos.",
+    href: "/es/servicios",
+    meta: "3–12 semanas · Cotización a medida",
+    ctaText: "Conversemos ›",
+    badge: "IA",
+  },
+  {
+    kind: "ARTÍCULO",
+    title: "TypeScript Tips Avanzados",
+    description:
+      "Domina TypeScript con consejos avanzados que te ahorrarán horas de debugging.",
+    href: "/es/blog/typescript-avanzado",
+    meta: "6 min · 7 Feb 2026",
+    ctaText: "Leer artículo ›",
+    badge: "T",
+  },
+];
 ---
 
-<Layout title="Inicio" lang="es">
+<Layout
+  title="Inicio"
+  lang="es"
+>
   <Navbar />
-  
+
   <main>
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <!-- Background Gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 via-transparent to-ventrue-accent/20 dark:from-primary-900/30 dark:to-ventrue-accent/10"></div>
-      
-      <!-- Animated Shapes -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-500/30 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 ventrue-accent/20 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
-      </div>
+    <HeroSection
+      statusText="Estado del Sistema: Óptimo"
+      headingLine1="Software, cloud"
+      headingAccent="y automatización"
+      headingLine2="como servicio."
+      description="Una práctica de ingeniería que diseña, construye y opera sistemas de extremo a extremo. Tu equipo de ingeniería bajo demanda — software, arquitectura cloud, DevOps e IA."
+      ctaHref="/es/servicios"
+      ctaText="Ver Servicios"
+      secondaryHref="/es/contact"
+      secondaryText="Conversemos"
+    >
+      <HeroSpotlight
+        slot="right-panel"
+        items={SPOTLIGHT_ITEMS}
+        figLabel="FIG 01 // BROADCAST_FEED"
+      />
+    </HeroSection>
 
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-        <h1 class="text-5xl md:text-7xl font-display font-bold mb-6">
-          <span class="gradient-text">Transformamos ideas</span>
-          <br />
-          <span class="dark:text-white text-gray-900">en soluciones digitales</span>
-        </h1>
-        
-        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 text-balance">
-          Somos Ventrue Tech, tu socio tecnológico para crear software innovador que impulsa el crecimiento de tu negocio.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/es/servicios" class="btn-primary inline-flex items-center gap-2">
-            Ver Servicios
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-          <a href="/es/contact" class="btn-secondary inline-flex items-center gap-2">
-            Contáctanos
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
+    <TrustStats
+      stats={[
+        { value: "50+", label: "Proyectos Completados" },
+        { value: "98%", label: "Satisfacción del Cliente" },
+        { value: "3+", label: "Años de Experiencia" },
+        { value: "5+", label: "Países Atendidos" },
+      ]}
+    />
 
-    <!-- Trust Stats -->
-    <section class="py-16 border-y border-white/10 bg-ventrue-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div class="text-4xl font-bold gradient-text mb-2">50+</div>
-            <div class="text-gray-400">Proyectos Completados</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold gradient-text mb-2">98%</div>
-            <div class="text-gray-400">Satisfacción del Cliente</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold gradient-text mb-2">3+</div>
-            <div class="text-gray-400">Años de Experiencia</div>
-          </div>
-          <div>
-            <div class="text-4xl font-bold gradient-text mb-2">5+</div>
-            <div class="text-gray-400">Países Atendidos</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ServicesPreview
+      title="Nuestros Servicios"
+      subtitle="Soluciones digitales integrales diseñadas para impulsar tu negocio"
+      viewAllHref="/es/servicios"
+      viewAllText="Ver Todos los Servicios"
+      services={[
+        {
+          title: "Arquitectura Cloud",
+          description: "Diseño y migración cloud-native sobre AWS o Azure.",
+          href: "/es/servicios",
+          svgIcon: CLOUD_SVG,
+          gradientFrom: "#0ea5e9",
+          gradientTo: "#0284c7",
+        },
+        {
+          title: "DevOps & SRE",
+          description: "CI/CD, IaC, observabilidad y on-call. Proyecto o retainer.",
+          href: "/es/servicios",
+          svgIcon: CODE_SVG,
+          gradientFrom: "#00d4ff",
+          gradientTo: "#0ea5e9",
+        },
+        {
+          title: "IA & Automatización",
+          description: "LLMs, workflows agénticos y pipelines de contenido.",
+          href: "/es/servicios",
+          svgIcon: BOLT_SVG,
+          gradientFrom: "#7c3aed",
+          gradientTo: "#00d4ff",
+        },
+        {
+          title: "Apps Móviles",
+          description: "iOS y Android con Flutter o React Native + backend.",
+          href: "/es/servicios",
+          svgIcon: MOBILE_SVG,
+          gradientFrom: "#0284c7",
+          gradientTo: "#7c3aed",
+        },
+      ]}
+    />
 
-    <!-- Services Preview -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Nuestros Servicios</h2>
-          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Soluciones digitales integrales diseñadas para impulsar tu negocio
-          </p>
-        </div>
+    <MissionVision
+      mission={{
+        svgIcon: BOLT_SVG,
+        title: "Nuestra Misión",
+        text: "Ayudar a empresas y equipos técnicos a construir, escalar y operar software de calidad — sin tener que ensamblar tres proveedores distintos.",
+        gradientFrom: "#0ea5e9",
+        gradientTo: "#0284c7",
+      }}
+      vision={{
+        svgIcon: EYE_SVG,
+        title: "Nuestra Visión",
+        text: "Ser la práctica de ingeniería de referencia en Latinoamérica para empresas que necesitan velocidad sin sacrificar arquitectura.",
+        gradientFrom: "#00d4ff",
+        gradientTo: "#0ea5e9",
+      }}
+    />
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Web Development -->
-          <a href="/es/servicios" class="group card card-light dark:card-dark p-6 hover:border-ventrue-accent/50 transition-all">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 group-hover:text-ventrue-accent transition-colors">Desarrollo Web</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-              Sitios web profesionales, SEO optimizados y centrado en conversiones.
-            </p>
-            <span class="text-ventrue-accent text-sm font-medium">Desde $800</span>
-          </a>
+    <ValuesSection
+      title="Nuestros Valores"
+      subtitle="Los valores que nos definen y guían cada decisión que tomamos."
+      values={[
+        {
+          svgIcon: SHIELD_SVG,
+          title: "Responsabilidad",
+          description: "Asumimos el resultado de extremo a extremo — desde la arquitectura hasta el page de las 3 AM.",
+          gradientFrom: "#00d4ff",
+          gradientTo: "#0ea5e9",
+        },
+        {
+          svgIcon: CHECK_SVG,
+          title: "Calidad",
+          description: "Escribimos código, escribimos tests y escribimos runbooks. Los tres.",
+          gradientFrom: "#0ea5e9",
+          gradientTo: "#0284c7",
+        },
+        {
+          svgIcon: EYE_SVG,
+          title: "Transparencia",
+          description: "Estimaciones, alcance y tradeoffs honestos — aunque cueste el contrato.",
+          gradientFrom: "#7c3aed",
+          gradientTo: "#00d4ff",
+        },
+        {
+          svgIcon: BULB_SVG,
+          title: "Pragmatismo",
+          description: "La arquitectura más simple que resuelve el problema real, no la más impresionante.",
+          gradientFrom: "#0284c7",
+          gradientTo: "#7c3aed",
+        },
+      ]}
+    />
 
-          <!-- Mobile Apps -->
-          <a href="/es/servicios" class="group card card-light dark:card-dark p-6 hover:border-ventrue-accent/50 transition-all">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-ventrue-accent to-primary-500 flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 group-hover:text-ventrue-accent transition-colors">Apps Móviles</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-              iOS y Android con Flutter. Entrega en 8-16 semanas.
-            </p>
-            <span class="text-ventrue-accent text-sm font-medium">Desde $15,000</span>
-          </a>
+    <FeaturedProjects
+      title="Últimos Proyectos"
+      viewAllHref="/es/projects"
+      viewAllText="Ver todos"
+      projects={[
+        {
+          href: "/es/projects/finhelper",
+          gradientFrom: "#0ea5e9",
+          gradientTo: "#00d4ff",
+          imageContent: "F",
+          title: "FinHelper App",
+          description: "Calculadora financiera en Flutter con monetización AdMob.",
+          technologies: ["Flutter", ".NET", "AdMob"],
+        },
+      ]}
+    />
 
-          <!-- APIs & Backend -->
-          <a href="/es/servicios" class="group card card-light dark:card-dark p-6 hover:border-ventrue-accent/50 transition-all">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-ventrue-secondary to-ventrue-accent flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 group-hover:text-ventrue-accent transition-colors">APIs & Backend</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-              Infraestructura escalable y segura para tu producto.
-            </p>
-            <span class="text-ventrue-accent text-sm font-medium">Desde $5,000</span>
-          </a>
+    <LatestArticles
+      title="Últimos Artículos"
+      viewAllHref="/es/blog"
+      viewAllText="Ver todos"
+      articles={[
+        {
+          href: "/es/blog/mejorar-codigo-2026",
+          date: "7 Feb 2026",
+          readTime: "8 min lectura",
+          title: "Cómo Mejorar Tu Código en 2026",
+          description: "Descubre las mejores prácticas, herramientas y técnicas para elevar tu nivel como desarrollador.",
+          readMoreText: "Leer más",
+        },
+        {
+          href: "/es/blog/typescript-avanzado",
+          date: "7 Feb 2026",
+          readTime: "6 min lectura",
+          title: "TypeScript Tips Avanzados",
+          description: "Domina TypeScript con estos consejos avanzados que te ahorrarán horas de debugging.",
+          readMoreText: "Leer más",
+        },
+      ]}
+    />
 
-          <!-- Consulting -->
-          <a href="/es/servicios" class="group card card-light dark:card-dark p-6 hover:border-ventrue-accent/50 transition-all">
-            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-600 to-ventrue-secondary flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2 group-hover:text-ventrue-accent transition-colors">Consultoría</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-              Estrategia técnica y arquitectura para tu proyecto.
-            </p>
-            <span class="text-ventrue-accent text-sm font-medium">Desde $2,000/día</span>
-          </a>
-        </div>
-
-        <div class="text-center mt-10">
-          <a href="/es/servicios" class="btn-secondary inline-flex items-center gap-2">
-            Ver Todos los Servicios
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Mission & Vision -->
-    <section class="py-24 bg-gray-50 dark:bg-ventrue-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12">
-          <!-- Mission -->
-          <div class="card card-light dark:card-dark p-8">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h2 class="text-2xl font-bold mb-4">Nuestra Misión</h2>
-            <p class="text-gray-600 dark:text-gray-300">
-              Empoderar a empresas y desarrolladores con herramientas tecnológicas de vanguardia que impulsan la innovación y el crecimiento sostenible en un mundo digital en constante evolución.
-            </p>
-          </div>
-
-          <!-- Vision -->
-          <div class="card card-light dark:card-dark p-8">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-ventrue-accent to-primary-500 flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-            </div>
-            <h2 class="text-2xl font-bold mb-4">Nuestra Visión</h2>
-            <p class="text-gray-600 dark:text-gray-300">
-              Ser líderes globales en soluciones tecnológicas que transforman la forma en que el mundo desarrolla software, estableciendo nuevos estándares de excelencia e innovación.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Values with Icons -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Nuestros Valores</h2>
-          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Los valores que nos definen y guían cada decisión que tomamos.
-          </p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Innovation -->
-          <div class="card card-light dark:card-dark text-center p-6">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-ventrue-accent to-primary-500 flex items-center justify-center">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Innovación</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Buscamos siempre nuevas formas de resolver problemas con tecnología de vanguardia.
-            </p>
-          </div>
-
-          <!-- Quality -->
-          <div class="card card-light dark:card-dark text-center p-6">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Calidad</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-              No comprometemos la excelencia en ningún aspecto de nuestro trabajo.
-            </p>
-          </div>
-
-          <!-- Integrity -->
-          <div class="card card-light dark:card-dark text-center p-6">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-ventrue-secondary to-ventrue-accent flex items-center justify-center">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Integridad</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Actuamos con honestidad y transparencia en cada proyecto.
-            </p>
-          </div>
-
-          <!-- Collaboration -->
-          <div class="card card-light dark:card-dark text-center p-6">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary-600 to-ventrue-secondary flex items-center justify-center">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Colaboración</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">
-              Creemos en el poder del trabajo en equipo con nuestros clientes.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Projects -->
-    <section class="py-24 bg-gray-50 dark:bg-ventrue-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-display font-bold">Últimos Proyectos</h2>
-          <a href="/es/projects" class="text-primary-500 hover:text-primary-600 font-medium flex items-center gap-1">
-            Ver todos
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Project Card -->
-          <a href="/es/projects/finhelper" class="group card card-light dark:card-dark overflow-hidden">
-            <div class="aspect-video bg-gradient-to-br from-primary-500 to-ventrue-accent flex items-center justify-center">
-              <span class="text-4xl font-bold text-white">F</span>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2 group-hover:text-primary-500 transition-colors">FinHelper App</h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                Calculadora financiera en Flutter con monetización AdMob.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                {['Flutter', '.NET', 'AdMob'].map((tech) => (
-                  <span class="px-2 py-1 text-xs rounded-lg bg-gray-100 dark:bg-white/10">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Latest Articles -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-display font-bold">Últimos Artículos</h2>
-          <a href="/es/blog" class="text-primary-500 hover:text-primary-600 font-medium flex items-center gap-1">
-            Ver todos
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Article Card -->
-          <a href="/es/blog/mejorar-codigo-2026" class="group card card-light dark:card-dark">
-            <div class="p-6">
-              <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                <span>7 Feb 2026</span>
-                <span>•</span>
-                <span>8 min lectura</span>
-              </div>
-              <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-500 transition-colors">
-                Cómo Mejorar Tu Código en 2026
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                Descubre las mejores prácticas, herramientas y técnicas para elevar tu nivel como desarrollador.
-              </p>
-              <span class="text-primary-500 text-sm font-medium group-hover:underline">
-                Leer más →
-              </span>
-            </div>
-          </a>
-
-          <!-- Article Card -->
-          <a href="/es/blog/typescript-avanzado" class="group card card-light dark:card-dark">
-            <div class="p-6">
-              <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                <span>7 Feb 2026</span>
-                <span>•</span>
-                <span>6 min lectura</span>
-              </div>
-              <h3 class="text-lg font-semibold mb-2 group-hover:text-primary-500 transition-colors">
-                TypeScript Tips Avanzados
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                Domina TypeScript con estos consejos avanzados que te ahorrarán horas de debugging.
-              </p>
-              <span class="text-primary-500 text-sm font-medium group-hover:underline">
-                Leer más →
-              </span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-24 bg-gradient-to-r from-primary-500 to-ventrue-accent">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">
-          ¿Listo para transformar tu proyecto?
-        </h2>
-        <p class="text-xl text-white/80 mb-8">
-          Hablemos sobre cómo podemos ayudarte a alcanzar tus objetivos tecnológicos.
-        </p>
-        <a href="/es/contact" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors">
-          Contáctanos Ahora
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-      </div>
-    </section>
+    <CTASection
+      title="¿Listo para transformar tu proyecto?"
+      description="Hablemos sobre cómo podemos ayudarte a alcanzar tus objetivos tecnológicos."
+      ctaHref="/es/contact"
+      ctaText="Contáctanos Ahora"
+    />
   </main>
 
   <Footer />

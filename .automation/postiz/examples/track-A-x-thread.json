@@ -1,0 +1,22 @@
+{
+  "type": "schedule",
+  "date": "2026-05-25T14:30:00.000Z",
+  "shortLink": false,
+  "tags": ["devops", "azure", "english"],
+  "posts": [
+    {
+      "integration": { "id": "REPLACE_WITH_POSTIZ_CHANNEL_X_VENTRUE" },
+      "value": [
+        { "content": "Spent an afternoon last week debugging an Azure pipeline that 'worked locally'.\n\nThe fix took 4 minutes. The diagnosis took 3 hours.\n\nHere's the checklist I'd give past-me — saves you the same loop. 🧵", "image": [] },
+        { "content": "1/ The pipeline yaml resolves variables at *queue time*, not run time.\nIf you reference $(Build.SourceBranch) in a variable group, it freezes to the branch that triggered the queue — not the one running now.", "image": [] },
+        { "content": "2/ `condition:` doesn't short-circuit downstream stages cleanly. A stage that's `Skipped` still inherits artifacts from the previous one — but only the ones declared, not the implicit checkout. Bit me twice this month.", "image": [] },
+        { "content": "3/ Service connection scope is per-project, not per-pipeline. If you grant it 'Owner' to debug once, it stays Owner forever. Audit those quarterly.", "image": [] },
+        { "content": "Full writeup + the diagnostic snippet I now run first on every broken pipeline: ventrue.tech/blog/azure-pipeline-debug-checklist\n\nWhat's the worst pipeline bug you've shipped to prod?", "image": [] }
+      ],
+      "settings": {
+        "__type": "x",
+        "who_can_reply_post": "everyone"
+      }
+    }
+  ]
+}

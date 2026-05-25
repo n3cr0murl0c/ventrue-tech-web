@@ -1,43 +1,63 @@
 {
-  "version": "1.0.0",
-  "updated": "2026-02-17",
+  "version": "2.0.0",
+  "updated": "2026-05-24",
   "company": {
     "name": "Ventrue Technologies",
     "shortName": "Ventrue Tech",
     "legalName": "Ventrue Technologies S.A.S.",
     "founded": 2024,
-    "headquarters": "Ecuador",
-    "industry": "Technology / Software Development / Digital Solutions",
+    "founder": {
+      "name": "Erick Escobar",
+      "role": "Founder & Principal Engineer",
+      "disciplines": [
+        "Full-Stack Software Engineering",
+        "Cloud Architecture",
+        "DevOps & Site Reliability",
+        "AI & Automation Engineering"
+      ]
+    },
+    "headquarters": "Quito, Ecuador",
+    "industry": "Engineering practice — software, cloud, DevOps, AI/automation",
     "website": "https://ventrue.tech",
     "email": "hello@ventrue.tech",
+    "phone": "+593 99 202 4767",
     "social": {
       "twitter": "@ventrue_tech",
       "github": "ventrue-tech",
-      "linkedin": ""
+      "linkedin": "",
+      "tiktok": ""
+    },
+    "positioning": {
+      "es": "Ventrue Tech es una práctica de ingeniería liderada por su fundador que entrega software, arquitectura cloud, DevOps y automatización con IA como un único servicio. Operamos como tu equipo de ingeniería bajo demanda — desde el diseño técnico hasta la operación en producción.",
+      "en": "Ventrue Tech is a founder-led engineering practice that delivers software, cloud architecture, DevOps, and AI-driven automation as a single service. We operate as your on-demand engineering team — from technical design through production operations."
     },
     "taglines": {
-      "es": "Transformamos ideas en soluciones digitales innovadoras",
-      "en": "We transform ideas into innovative digital solutions"
+      "es": "Software, cloud y automatización como servicio.",
+      "en": "Software, cloud, and automation — delivered as a service."
+    },
+    "taglinesSecondary": {
+      "es": "Diseñamos, construimos y operamos sistemas de extremo a extremo.",
+      "en": "We design, build, and operate end-to-end systems."
     }
   },
   "mission": {
-    "es": "Empoderar a empresas y desarrolladores con herramientas tecnológicas de vanguardia que impulsan la innovación y el crecimiento sostenible.",
-    "en": "Empowering companies and developers with cutting-edge technological tools that drive innovation and sustainable growth."
+    "es": "Ayudar a empresas y equipos técnicos a construir, escalar y operar software de calidad — sin tener que ensamblar tres proveedores distintos.",
+    "en": "Help companies and technical teams build, scale, and operate quality software — without having to assemble three separate vendors."
   },
   "vision": {
-    "es": "Ser líderes globales en soluciones tecnológicas que transforman la forma en que el mundo desarrolla software.",
-    "en": "To be global leaders in technological solutions that transform how the world develops software."
+    "es": "Ser la práctica de ingeniería de referencia en Latinoamérica para empresas que necesitan velocidad sin sacrificar arquitectura.",
+    "en": "Be the reference engineering practice in Latin America for companies that need speed without sacrificing architecture."
   },
   "values": [
     {
-      "key": "innovation",
+      "key": "ownership",
       "name": {
-        "es": "Innovación",
-        "en": "Innovation"
+        "es": "Responsabilidad",
+        "en": "Ownership"
       },
       "description": {
-        "es": "Constantemente pushing boundaries and exploring new technologies",
-        "en": "Constantly pushing boundaries and exploring new technologies"
+        "es": "Asumimos el resultado de extremo a extremo — desde la decisión de arquitectura hasta el page de las 3 AM cuando algo se rompe.",
+        "en": "We own the outcome end-to-end — from the architecture decision to the 3 AM page when something breaks."
       }
     },
     {
@@ -47,30 +67,30 @@
         "en": "Quality"
       },
       "description": {
-        "es": "Entregando excelencia en cada línea de código y proyecto",
-        "en": "Delivering excellence in every line of code and project"
+        "es": "Escribimos código, escribimos tests y escribimos runbooks. Los tres.",
+        "en": "We write code, write tests, and write runbooks. All three."
       }
     },
     {
-      "key": "integrity",
+      "key": "transparency",
       "name": {
-        "es": "Integridad",
-        "en": "Integrity"
+        "es": "Transparencia",
+        "en": "Transparency"
       },
       "description": {
-        "es": "Transparente, honesto y ético en todos los tratos",
-        "en": "Transparent, honest, and ethical in all dealings"
+        "es": "Estimaciones honestas, alcance honesto, tradeoffs honestos — aunque cueste el contrato.",
+        "en": "Honest estimates, honest scope, honest tradeoffs — even when it costs the engagement."
       }
     },
     {
-      "key": "collaboration",
+      "key": "pragmatism",
       "name": {
-        "es": "Colaboración",
-        "en": "Collaboration"
+        "es": "Pragmatismo",
+        "en": "Pragmatism"
       },
       "description": {
-        "es": "Trabajando juntos para lograr resultados extraordinarios",
-        "en": "Working together to achieve extraordinary results"
+        "es": "Elegimos la arquitectura más simple que resuelve el problema real, no la más impresionante.",
+        "en": "We pick the simplest architecture that solves the actual problem, not the most impressive one."
       }
     }
   ],
@@ -93,6 +113,12 @@
       "primary": "#ffffff",
       "secondary": "#94a3b8",
       "muted": "#64748b"
+    },
+    "cmyk": {
+      "primaryDark": "C75 M70 Y65 K90",
+      "accentCyan": "C70 M5 Y0 K0",
+      "secondaryPurple": "C72 M85 Y0 K0",
+      "primaryBlue": "C82 M30 Y0 K0"
     }
   },
   "gradients": {
@@ -109,36 +135,130 @@
   },
   "products": [
     {
+      "key": "finhelper",
       "name": "FinHelper",
-      "description": "Personal finance management app",
+      "description": "Personal finance management app (Flutter + .NET + AdMob)",
       "status": "active"
     },
     {
+      "key": "ventrueSocial",
+      "name": "Ventrue Social",
+      "description": "Multi-client AI-driven social content automation SaaS (TikTok, Instagram, LinkedIn)",
+      "status": "in-development",
+      "note": "Working name; pending TikTok production review"
+    },
+    {
+      "key": "ventrueWeb",
       "name": "Ventrue Web",
       "description": "Corporate website builder platform",
-      "status": "development"
+      "status": "backlog"
     }
   ],
   "services": [
     {
-      "name": "Corporate Websites",
-      "description": "Custom web solutions",
-      "targetMarket": "Businesses, startups"
+      "key": "cloudArchitecture",
+      "name": {
+        "es": "Arquitectura Cloud",
+        "en": "Cloud Architecture"
+      },
+      "description": {
+        "es": "Diseño multi-región y migración cloud-native sobre AWS o Azure.",
+        "en": "Multi-region, cloud-native design + migration on AWS or Azure."
+      },
+      "targetMarket": "CTOs, growth-stage startups",
+      "internalPriceUsd": "$4k – $30k",
+      "timeline": "2–6 weeks",
+      "pricingConfirmed": false
     },
     {
-      "name": "Mobile Applications",
-      "description": "iOS/Android development",
-      "targetMarket": "Companies needing mobile apps"
+      "key": "devopsSre",
+      "name": {
+        "es": "DevOps & SRE",
+        "en": "DevOps & SRE"
+      },
+      "description": {
+        "es": "CI/CD, IaC (Terraform), observabilidad y playbooks de on-call. Proyecto o retainer mensual.",
+        "en": "CI/CD, IaC (Terraform), observability, on-call playbooks. Project or monthly retainer."
+      },
+      "targetMarket": "Engineering leads, ops-light teams",
+      "internalPriceUsd": "$3k – $25k or $2.5k/mo retainer",
+      "timeline": "2–8 weeks",
+      "pricingConfirmed": false
     },
     {
-      "name": "APIs & Backend",
-      "description": "Scalable server solutions",
-      "targetMarket": "Developers, enterprises"
+      "key": "aiAutomation",
+      "name": {
+        "es": "IA & Automatización",
+        "en": "AI & Automation"
+      },
+      "description": {
+        "es": "Integraciones con LLMs, workflows agénticos, automatización de herramientas internas y pipelines de contenido.",
+        "en": "LLM integrations, agentic workflows, internal-tool automation, content pipelines."
+      },
+      "targetMarket": "Operators, marketing & content teams",
+      "internalPriceUsd": "$5k – $50k",
+      "timeline": "3–12 weeks",
+      "pricingConfirmed": false
     },
     {
-      "name": "Technical Consulting",
-      "description": "Strategy and architecture",
-      "targetMarket": "CTOs, technical leaders"
+      "key": "mobileApplications",
+      "name": {
+        "es": "Apps Móviles",
+        "en": "Mobile Applications"
+      },
+      "description": {
+        "es": "iOS y Android con Flutter o React Native + backend.",
+        "en": "iOS & Android with Flutter or React Native + backend."
+      },
+      "targetMarket": "Companies needing mobile apps",
+      "internalPriceUsd": "$15k – $60k",
+      "timeline": "8–16 weeks",
+      "pricingConfirmed": true
+    },
+    {
+      "key": "apiBackend",
+      "name": {
+        "es": "APIs y Backend",
+        "en": "APIs & Backend"
+      },
+      "description": {
+        "es": "Backends RESTful y event-driven escalables.",
+        "en": "Scalable RESTful + event-driven backends."
+      },
+      "targetMarket": "Developers, enterprises",
+      "internalPriceUsd": "$5k – $25k",
+      "timeline": "4–10 weeks",
+      "pricingConfirmed": true
+    },
+    {
+      "key": "corporateWebsites",
+      "name": {
+        "es": "Web Corporativa",
+        "en": "Corporate Websites"
+      },
+      "description": {
+        "es": "Sitios optimizados para conversión con SEO + analytics + CMS.",
+        "en": "Conversion-optimized sites with SEO + analytics + CMS."
+      },
+      "targetMarket": "Businesses, startups",
+      "internalPriceUsd": "$800 – $3.5k",
+      "timeline": "2–6 weeks",
+      "pricingConfirmed": true
+    },
+    {
+      "key": "fractionalCto",
+      "name": {
+        "es": "CTO Fraccional / Consultoría Técnica",
+        "en": "Fractional CTO / Tech Advisory"
+      },
+      "description": {
+        "es": "Estrategia, auditorías de arquitectura, hiring técnico y liderazgo fraccional.",
+        "en": "Strategy, architecture audits, hiring, fractional leadership."
+      },
+      "targetMarket": "Founders, technical leaders",
+      "internalPriceUsd": "$2k – $50k",
+      "timeline": "2–8 weeks",
+      "pricingConfirmed": true
     }
   ],
   "sovi": {
@@ -149,5 +269,13 @@
       "V": "Value-Driven - Communicate inherent value, not just price",
       "I": "Informative - Build trust through transparency and education"
     }
+  },
+  "assetSizes": {
+    "favicon": { "size": "32x32, 16x16", "format": "ICO/PNG" },
+    "appIconTikTok": { "size": "1024x1024", "format": "PNG" },
+    "appIconPlayStore": { "size": "512x512", "format": "PNG" },
+    "appIconAppStore": { "size": "1024x1024", "format": "PNG" },
+    "cardFront": { "size": "85x55mm + 3mm bleed", "format": "PDF (CMYK)" },
+    "openGraph": { "size": "1200x630", "format": "PNG" }
   }
 }

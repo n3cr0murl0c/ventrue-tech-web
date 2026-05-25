@@ -3,71 +3,118 @@ import Layout from '@/layouts/Layout.astro';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 
+// Service order leads with our differentiated practice areas (cloud, devops, AI),
+// then the build-it categories (mobile, APIs, web), then advisory.
+// Prices are intentionally not surfaced publicly — every engagement is scoped and quoted to fit.
 const services = [
+  {
+    id: 'cloud',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>`,
+    title: 'Arquitectura Cloud',
+    description: 'Diseño multi-región y migración cloud-native sobre AWS o Azure. Pensamos primero en costos, observabilidad y recuperación ante desastres — no en el servicio de moda.',
+    features: [
+      'Diseño de arquitectura cloud-native',
+      'Estrategia multi-región y multi-AZ',
+      'Migración desde on-prem o legacy',
+      'Optimización de costos (FinOps)',
+      'Diseño para recuperación ante desastres',
+      'Documentación de decisiones (ADRs)'
+    ],
+    timeline: '2-6 semanas',
+    popular: false
+  },
+  {
+    id: 'devops',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>`,
+    title: 'DevOps & SRE',
+    description: 'CI/CD, infraestructura como código, observabilidad y playbooks de on-call. Tomamos tu pipeline de despliegue y tu producción en producción en serio — proyecto o retainer mensual.',
+    features: [
+      'Pipelines de CI/CD (GitHub Actions, GitLab)',
+      'IaC con Terraform / OpenTofu',
+      'Observabilidad (logs, métricas, traces)',
+      'SLOs y alertas accionables',
+      'Playbooks de on-call y postmortems',
+      'Hardening de seguridad'
+    ],
+    timeline: '2-8 semanas',
+    popular: false
+  },
+  {
+    id: 'ai-automation',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+    title: 'IA & Automatización',
+    description: 'Integraciones con LLMs, workflows agénticos, automatización de herramientas internas y pipelines de contenido. Construimos y operamos — no solo prototipos demo.',
+    features: [
+      'Integración con LLMs (Claude, GPT, Llama)',
+      'Agentes con tool-use y memoria',
+      'Automatización de procesos internos',
+      'Pipelines de contenido y posting',
+      'Evaluación y guardrails',
+      'Monitoreo de costos por token'
+    ],
+    timeline: '3-12 semanas',
+    popular: true
+  },
+  {
+    id: 'mobile',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
+    title: 'Apps Móviles',
+    description: 'Aplicaciones para iOS y Android con Flutter o React Native + backend. Entrega en 8-16 semanas con publicación en tiendas incluida.',
+    features: [
+      'iOS y Android desde un solo código',
+      'UI/UX nativo y fluido',
+      'Backend escalable incluido',
+      'Publicación en App Store y Play Store',
+      'Notificaciones push',
+      'Analytics integrado'
+    ],
+    timeline: '8-16 semanas',
+    popular: false
+  },
+  {
+    id: 'api',
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>`,
+    title: 'APIs y Backend',
+    description: 'Backends RESTful y event-driven escalables. APIs documentadas, autenticación robusta y observabilidad desde el día uno.',
+    features: [
+      'APIs RESTful y event-driven',
+      'OpenAPI / Swagger automático',
+      'Autenticación OAuth / JWT',
+      'Base de datos optimizada',
+      'Cache y CDN',
+      'Pruebas de carga'
+    ],
+    timeline: '4-10 semanas',
+    popular: false
+  },
   {
     id: 'web',
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>`,
-    title: 'Desarrollo Web Corporativo',
-    price: '$800 - $3,500',
-    description: 'Sitios web personalizados que convierten visitantes en clientes. Optimizados para SEO, diseñados para móviles y con carga ultrarrápida.',
+    title: 'Web Corporativa',
+    description: 'Sitios optimizados para conversión con SEO, analytics y CMS. Carga rápida, accesibilidad y panel de administración.',
     features: [
-      'Diseño UX/UI moderno y único',
-      'SEO optimizado para Google',
-      'Responsive design (móvil primero)',
-      'Velocidad de carga < 2s',
-      'Panel de administración',
+      'Diseño UX/UI moderno',
+      'SEO técnico y on-page',
+      'Responsive (móvil primero)',
+      'Core Web Vitals optimizados',
+      'CMS / panel de admin',
       'Integración con Analytics'
     ],
     timeline: '2-6 semanas',
     popular: false
   },
   {
-    id: 'mobile',
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
-    title: 'Apps Móviles',
-    price: '$15,000 - $60,000',
-    description: 'Aplicaciones nativas para iOS y Android usando Flutter o React Native. Entrega en 8-16 semanas con soporte completo.',
-    features: [
-      'iOS y Android un código desde',
-      'UI/UX nativo y fluido',
-      'Backend escal',
-      'Publicable incluidoación en tiendas',
-      'Notificaciones push',
-      'Analytics integrado'
-    ],
-    timeline: '8-16 semanas',
-    popular: true
-  },
-  {
-    id: 'api',
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>`,
-    title: 'APIs y Backend',
-    price: '$5,000 - $25,000',
-    description: 'Infraestructura servidor escalable y arquitectura cloud-native. APIs RESTful seguras y documentadas.',
-    features: [
-      'Arquitectura cloud-native',
-      'APIs RESTful seguras',
-      'Documentación automática',
-      'Base de datos optimizada',
-      'Cache y CDN incluidos',
-      'Escalabilidad automática'
-    ],
-    timeline: '4-10 semanas',
-    popular: false
-  },
-  {
     id: 'consulting',
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`,
-    title: 'Consultoría Técnica',
-    price: '$2,000 - $50,000',
-    description: 'Estrategia tecnológica y arquitectura de sistemas. CTO-as-a-service para startups y empresas en crecimiento.',
+    title: 'CTO Fraccional / Consultoría',
+    description: 'Liderazgo técnico fraccional, auditorías de arquitectura, hiring técnico y plan de escalabilidad. Para fundadores que necesitan dirección sin contratar a tiempo completo aún.',
     features: [
       'Auditoría técnica completa',
-      'Arquitectura de sistemas',
-      'Selección de tecnologías',
-      'Code review y mejores prácticas',
-      'Plan de escalabilidad',
-      'Capacitación de equipos'
+      'Roadmap de arquitectura',
+      'Selección de stack y vendors',
+      'Hiring y entrevistas técnicas',
+      'Code review estratégico',
+      'Capacitación del equipo interno'
     ],
     timeline: '2-8 semanas',
     popular: false
@@ -128,34 +175,38 @@ const portfolio = [
 const faqs = [
   {
     question: '¿Cuánto tiempo toma desarrollar un proyecto?',
-    answer: 'El tiempo varía según la complejidad: webs corporativas 2-6 semanas, apps móviles 8-16 semanas, APIs 4-10 semanas. Siempre entregamos un cronograma claro antes de comenzar.'
+    answer: 'El tiempo varía según la complejidad: webs corporativas 2-6 semanas, apps móviles 8-16 semanas, APIs 4-10 semanas, arquitectura cloud 2-6 semanas. Siempre entregamos un cronograma claro antes de comenzar.'
   },
   {
-    question: '¿Qué incluye el precio del proyecto?',
-    answer: 'Todos nuestros precios incluyen: diseño, desarrollo, pruebas,部署, documentación y 30 días de soporte post-lanzamiento. No hay costos ocultos.'
+    question: '¿Por qué no publican precios en el sitio?',
+    answer: 'Cada proyecto es distinto. Antes de comprometer un número, queremos entender tu alcance, tus restricciones y tu definición de éxito. Una llamada de 30 minutos suele ser suficiente para enviarte una propuesta detallada con precio fijo o por hitos.'
   },
   {
-    question: '¿Puedo modificar el proyecto después de entregado?',
-    answer: 'Sí, ofrecemos paquetes de mantenimiento y mejoras continuas. También puedes optar por acceso completo al código fuente si lo prefieres.'
+    question: '¿Qué incluye una propuesta típica?',
+    answer: 'Diseño, desarrollo, pruebas, despliegue, documentación y 30 días de soporte post-lanzamiento — todo está incluido salvo que el alcance lo justifique aparte. No hay costos ocultos: lo que ves en la propuesta es lo que pagas.'
   },
   {
     question: '¿Cómo funciona el proceso de pago?',
-    answer: 'Usamos un modelo de hitos: 40% al inicio, 30% en fase de desarrollo, 30% al交付. Aceptamos transferencia bancaria y PayPal.'
+    answer: 'Usamos un modelo de hitos: típicamente 40% al inicio, 30% en fase de desarrollo, 30% al entregar. Para retainers mensuales (DevOps, CTO fraccional), facturamos a inicio de cada mes. Aceptamos transferencia bancaria y PayPal.'
+  },
+  {
+    question: '¿Puedo modificar el proyecto después de entregado?',
+    answer: 'Sí, ofrecemos paquetes de mantenimiento y mejoras continuas. También puedes optar por acceso completo al código fuente si lo prefieres — el código es tuyo desde el día uno.'
   },
   {
     question: '¿Ofrecen soporte después del lanzamiento?',
-    answer: 'Incluimos 30 días de soporte gratuito. Afterwards, tenemos planes de mantenimiento desde $199/mes que incluyen correcciones, actualizaciones de seguridad y mejoras menores.'
+    answer: 'Incluimos 30 días de soporte gratuito en todos los proyectos. Después puedes contratar un plan de mantenimiento o un retainer mensual que incluye correcciones, actualizaciones de seguridad y mejoras menores.'
   },
   {
     question: '¿Trabajan con empresas de otros países?',
-    answer: 'Sí, aunque estamos basados en Ecuador, trabajamos con clientes de toda Latinoamérica y España. Communicamos en español e inglés.'
+    answer: 'Sí. Aunque estamos basados en Ecuador, trabajamos con clientes de toda Latinoamérica, España y EE.UU. Nos comunicamos en español e inglés.'
   }
 ];
 ---
 
-<Layout 
-  title="Servicios de Desarrollo | Ventrue Technologies"
-  description="Desarrollo web, apps móviles, APIs y consultoría técnica en Ecuador. Transformamos ideas en soluciones digitales innovadoras."
+<Layout
+  title="Servicios | Ventrue Tech — Software, cloud y automatización"
+  description="Arquitectura cloud, DevOps, IA, apps móviles, APIs y CTO fraccional. Una sola práctica de ingeniería que diseña, construye y opera."
   lang="es"
 >
   <Navbar />
@@ -179,26 +230,26 @@ const faqs = [
         <!-- Eyebrow -->
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ventrue-accent/10 border border-ventrue-accent/30 mb-8">
           <span class="w-2 h-2 rounded-full bg-ventrue-accent animate-pulse"></span>
-          <span class="text-sm font-medium text-ventrue-accent">Expertos en Desarrollo Digital</span>
+          <span class="text-sm font-medium text-ventrue-accent">Diseñamos · Construimos · Operamos</span>
         </div>
 
         <!-- Headline -->
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6">
-          <span class="gradient-text">Transforma tu negocio</span>
+          <span class="gradient-text">Software, cloud y automatización</span>
           <br />
-          <span class="text-white">con tecnología de vanguardia</span>
+          <span class="text-white">como un solo servicio.</span>
         </h1>
 
         <!-- Subheadline -->
         <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 text-balance">
-          Desarrollamos soluciones digitales personalizadas que impulsan el crecimiento de tu empresa. 
-          Desde sitios web corporativos hasta apps móviles y arquitecturas cloud-native.
+          Una práctica de ingeniería que cubre todo el ciclo: arquitectura cloud, DevOps, IA y construcción de producto.
+          Tu equipo de ingeniería bajo demanda — sin tener que ensamblar tres proveedores distintos.
         </p>
 
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <a href="#contact-form" class="btn-primary inline-flex items-center gap-2 px-8 py-4 text-lg">
-            Solicitar Cotización
+            Conversemos
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -251,10 +302,10 @@ const faqs = [
         <div class="text-center mb-16">
           <span class="text-ventrue-accent font-medium">NUESTROS SERVICIOS</span>
           <h2 class="text-3xl md:text-5xl font-display font-bold mt-2 mb-4">
-            Soluciones Digitales <span class="gradient-text">Completas</span>
+            Una práctica, <span class="gradient-text">siete disciplinas</span>
           </h2>
           <p class="text-gray-400 max-w-2xl mx-auto">
-            Desde la concepción hasta el lanzamiento, transformamos tus ideas en productos digitales que generan resultados reales.
+            Desde la arquitectura hasta el on-call. Elige una disciplina o trabaja con nosotros como tu equipo de ingeniería completo.
           </p>
         </div>
 
@@ -296,11 +347,11 @@ const faqs = [
               <!-- Meta -->
               <div class="flex items-center justify-between pt-6 border-t border-white/10">
                 <div>
-                  <div class="text-2xl font-bold gradient-text">{service.price}</div>
-                  <div class="text-sm text-gray-500">Tiempo: {service.timeline}</div>
+                  <div class="text-sm font-medium text-ventrue-accent uppercase tracking-wide">Cotización a medida</div>
+                  <div class="text-sm text-gray-500 mt-1">Tiempo: {service.timeline}</div>
                 </div>
                 <a href="#contact-form" class="btn-primary px-6 py-2">
-                  Solicitar
+                  Conversemos
                 </a>
               </div>
             </div>
@@ -583,10 +634,13 @@ const faqs = [
                     class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-ventrue-accent focus:ring-2 focus:ring-ventrue-accent/20 transition-all outline-none text-white appearance-none cursor-pointer"
                   >
                     <option value="" class="text-gray-900">Selecciona un servicio</option>
-                    <option value="web" class="text-gray-900">Desarrollo Web Corporativo</option>
+                    <option value="cloud" class="text-gray-900">Arquitectura Cloud</option>
+                    <option value="devops" class="text-gray-900">DevOps & SRE</option>
+                    <option value="ai-automation" class="text-gray-900">IA & Automatización</option>
                     <option value="mobile" class="text-gray-900">Apps Móviles</option>
                     <option value="api" class="text-gray-900">APIs y Backend</option>
-                    <option value="consulting" class="text-gray-900">Consultoría Técnica</option>
+                    <option value="web" class="text-gray-900">Web Corporativa</option>
+                    <option value="consulting" class="text-gray-900">CTO Fraccional / Consultoría</option>
                     <option value="other" class="text-gray-900">Otro</option>
                   </select>
                 </div>

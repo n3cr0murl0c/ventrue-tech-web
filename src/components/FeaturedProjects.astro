@@ -1,0 +1,82 @@
+---
+export interface ProjectItem {
+  href: string;
+  gradientFrom: string; // hex
+  gradientTo: string;   // hex
+  imageContent: string;
+  title: string;
+  description: string;
+  technologies: string[];
+}
+
+export interface Props {
+  title: string;
+  viewAllHref: string;
+  viewAllText: string;
+  projects: ProjectItem[];
+}
+
+const { title, viewAllHref, viewAllText, projects } = Astro.props;
+---
+
+<section class="py-24 bg-gray-50 dark:bg-ventrue-dark">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-display font-bold">
+        {title}
+      </h2>
+      <a
+        href={viewAllHref}
+        class="text-primary-500 hover:text-primary-600 font-medium flex items-center gap-1"
+      >
+        {viewAllText}
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <a
+          href={project.href}
+          class="group card card-light dark:card-dark overflow-hidden"
+        >
+          <div
+            class="aspect-video flex items-center justify-center"
+            style={`background: linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})`}
+          >
+            <span class="text-4xl font-bold text-white">{project.imageContent}</span>
+          </div>
+          <div class="p-6">
+            <h3
+              class="text-xl font-semibold mb-2 group-hover:text-primary-500 transition-colors"
+            >
+              {project.title}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <span class="px-2 py-1 text-xs rounded-lg bg-gray-100 dark:bg-white/10">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
