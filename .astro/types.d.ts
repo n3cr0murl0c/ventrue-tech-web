@@ -126,6 +126,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"2026-05-25-principios-devsecops-como-construimos-la-resiliencia-de-nuestros-sistemas.md": {
+	id: "2026-05-25-principios-devsecops-como-construimos-la-resiliencia-de-nuestros-sistemas.md";
+  slug: "2026-05-25-principios-devsecops-como-construimos-la-resiliencia-de-nuestros-sistemas";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "mejorar-codigo-2026.md": {
 	id: "mejorar-codigo-2026.md";
   slug: "mejorar-codigo-2026";
