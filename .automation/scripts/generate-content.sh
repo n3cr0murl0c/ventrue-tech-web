@@ -1,98 +1,82 @@
 #!/bin/bash
-# Ventrue Tech — Content Generator (cron entry-point)
+# Ventrue Tech — commit & push new blog posts written by Hermes Agent.
 #
-# Calls the dockerized content pipeline (CustomAi/content_gen/) which runs a
-# plan -> write -> critique -> revise loop against a local Gemma model
-# served by llama.cpp, with RAG over books in content_gen/books/.
+# Previous behaviour (hardcoded bash templates / Docker-based Python pipeline)
+# has been retired in favour of Hermes Agent + Holographic memory. The actual
+# content generation now happens in Hermes via the `ventrue-blog` skill, which
+# writes Markdown directly into src/content/blog/. See:
+#   ~/GithubRepos/CustomAi/hermes/README.md
 #
-# The pipeline itself lives in a separate repo (CustomAi) so it can be reused
-# across projects. This shim writes its output (markdown blog posts) into
-# THIS repo's src/content/blog/ via a bind mount.
+# This script's only job is the host-side git layer: detect new / modified blog
+# posts, commit them one-per-file with the title from frontmatter, and push.
 #
-# Prerequisites (one-time):
-#   - Docker 24+ and docker-compose v2 installed
-#   - GGUF model file in $CONTENT_GEN_DIR/models/
-#   - $CONTENT_GEN_DIR/.env configured (cp .env.example .env)
-#   - `docker compose -f $CONTENT_GEN_DIR/docker-compose.yml up -d llm`
-#   - Override the pipeline location with: export CONTENT_GEN_DIR=/path/to/content_gen
+# Schedule it shortly after the Hermes cron job, e.g.:
+#   crontab -e
+#   30 9 * * 1-5  /home/n3cr0murl0c/GithubRepos/ventrue-tech-web/.automation/scripts/generate-content.sh >> ~/ventrue-publish.log 2>&1
 #
-# Usage:
-#   bash .automation/scripts/generate-content.sh                # day-of-week topic, Spanish
-#   bash .automation/scripts/generate-content.sh ai en          # specific topic + language
+# Manual runs work too — handy after testing the skill interactively.
 
 set -euo pipefail
 
-# Repo root regardless of where the cron invokes this from.
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-
-# Location of the dockerized content pipeline. Override via env var if it lives elsewhere.
-CONTENT_GEN_DIR="${CONTENT_GEN_DIR:-$HOME/GithubRepos/CustomAi/content_gen}"
-
-if [[ ! -d "$CONTENT_GEN_DIR" ]]; then
-    echo "✗ CONTENT_GEN_DIR not found: $CONTENT_GEN_DIR" >&2
-    echo "  Set CONTENT_GEN_DIR to the path of the content_gen directory and re-run." >&2
-    exit 1
-fi
+BLOG_DIR="$REPO_ROOT/src/content/blog"
 
 cd "$REPO_ROOT"
 
-TOPIC="${1:-}"
-LANG="${2:-es}"
+# Collect blog posts that are either untracked or modified.
+mapfile -t NEW_FILES < <(
+    {
+        git ls-files --others --exclude-standard "$BLOG_DIR" 2>/dev/null
+        git diff --name-only "$BLOG_DIR" 2>/dev/null
+    } | sort -u | grep -E '\.md$' || true
+)
 
-GENERATOR_ARGS=("--lang" "$LANG")
-if [[ -n "$TOPIC" ]]; then
-    GENERATOR_ARGS+=("--topic" "$TOPIC")
+if [[ ${#NEW_FILES[@]} -eq 0 ]]; then
+    echo "▶ No new or modified blog posts to publish."
+    exit 0
 fi
 
-# Confirm the LLM service is up. If not, start it and wait for the healthcheck.
-if ! docker compose -f "$CONTENT_GEN_DIR/docker-compose.yml" ps llm --status running --quiet | grep -q .; then
-    echo "▶ LLM service not running — starting it..."
-    docker compose -f "$CONTENT_GEN_DIR/docker-compose.yml" up -d llm
-    # Wait up to ~3 minutes for the healthcheck (model load can take a while).
-    for _ in $(seq 1 36); do
-        STATUS=$(docker inspect -f '{{.State.Health.Status}}' ventrue-llm 2>/dev/null || echo "missing")
-        if [[ "$STATUS" == "healthy" ]]; then
-            break
-        fi
-        sleep 5
-    done
-    if [[ "$STATUS" != "healthy" ]]; then
-        echo "✗ LLM service failed to become healthy. Check: docker compose logs llm" >&2
-        exit 1
+echo "▶ Found ${#NEW_FILES[@]} blog post(s) to publish:"
+printf '  - %s\n' "${NEW_FILES[@]}"
+
+extract_title() {
+    # Parse the `title: "..."` line from YAML frontmatter; fall back to filename.
+    local file="$1"
+    local title
+    title=$(awk '
+        /^---[[:space:]]*$/ { fm = !fm; next }
+        fm && /^title:/ {
+            sub(/^title:[[:space:]]*/, "")
+            gsub(/^"|"$/, "")
+            gsub(/^\x27|\x27$/, "")
+            print
+            exit
+        }
+    ' "$file")
+    if [[ -z "$title" ]]; then
+        title="$(basename "$file" .md)"
     fi
-fi
+    printf '%s' "$title"
+}
 
-echo "▶ Generating post (topic=${TOPIC:-auto}, lang=$LANG)..."
-
-# Capture the list of blog posts before, so we can find what was added.
-BLOG_DIR="$REPO_ROOT/src/content/blog"
-BEFORE=$(ls "$BLOG_DIR" 2>/dev/null | sort || true)
-
-# Note: --no-commit because we do git ops on the host (the container doesn't have credentials).
-docker compose -f "$CONTENT_GEN_DIR/docker-compose.yml" run --rm generator \
-    "${GENERATOR_ARGS[@]}" --no-commit
-
-AFTER=$(ls "$BLOG_DIR" 2>/dev/null | sort || true)
-NEW_FILES=$(comm -13 <(echo "$BEFORE") <(echo "$AFTER") || true)
-
-if [[ -z "$NEW_FILES" ]]; then
-    echo "✗ No new post was produced. Check the generator output above." >&2
-    exit 1
-fi
-
-echo "▶ New post(s):"
-echo "$NEW_FILES" | sed 's/^/  - /'
-
-# Commit + push (host-side, so we use the developer's git config / SSH keys).
-echo "$NEW_FILES" | while read -r file; do
-    [[ -z "$file" ]] && continue
-    git add "$BLOG_DIR/$file"
+# One commit per file so the log stays useful.
+for file in "${NEW_FILES[@]}"; do
+    title=$(extract_title "$file")
+    git add "$file"
+    if git diff --staged --quiet; then
+        continue
+    fi
+    git commit -m "📝 Auto-publish: ${title}"
 done
 
-if ! git diff --staged --quiet; then
-    FIRST_FILE=$(echo "$NEW_FILES" | head -n1)
-    git commit -m "📝 Auto-generate: ${FIRST_FILE%.md}"
-    git push origin main 2>/dev/null || echo "(push skipped — no remote or no creds)"
+# Single push at the end.
+if git log @{u}.. --oneline 2>/dev/null | grep -q .; then
+    if git push origin main 2>&1; then
+        echo "▶ Push complete."
+    else
+        echo "✗ Push failed — check credentials." >&2
+        exit 1
+    fi
+else
+    echo "▶ Nothing to push."
 fi
-
-echo "✓ Done."
