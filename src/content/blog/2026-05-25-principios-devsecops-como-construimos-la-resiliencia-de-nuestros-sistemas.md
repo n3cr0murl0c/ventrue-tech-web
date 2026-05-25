@@ -1,7 +1,7 @@
 ---
 title: "Principios de DevSecOps: Cómo construimos la resiliencia de nuestros sistemas."
 description: "La seguridad no es un complemento, sino un atributo de diseño inherente a cada paso del ciclo de vida del desarrollo. Implementamos DevSecOps no como una tarea, sino como una cultura de propiedad compartida."
-pubDate: "2026-05-25"
+pubDate: 2026-05-25
 author: "Erick Escobar"
 tags: ["devops", "tutorial", "2026"]
 lang: "es"
